@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StartPage">
+   <children>
+      <Label contentDisplay="RIGHT" layoutX="245.0" prefHeight="41.0" prefWidth="277.0" text="California University Library" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="Berlin Sans FB" size="22.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="AncorTabela" layoutX="-1.0" layoutY="50.0" prefHeight="448.0" prefWidth="766.0">
+         <children>
+            <TabPane fx:id="TabelaFuncao" prefHeight="481.0" prefWidth="766.0" rotateGraphic="true" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="-33.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <tabs>
+                  <Tab closable="false" text="Bem-vindo!">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <effect>
+                              <Glow />
+                           </effect>
+                           <children>
+                              <AnchorPane layoutX="-1.0" prefHeight="452.0" prefWidth="766.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <ImageView fitHeight="419.0" fitWidth="851.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../../../../../../../Downloads/fundo01.jpg" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <Label graphicTextGap="8.0" layoutX="179.0" layoutY="54.0" prefHeight="87.0" prefWidth="466.0" text="Bem-vindo ao Sistema de Gerenciamento da Bibliota da Califonia University" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font name="System Italic" size="25.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="InicioTab" disable="true" text="Inicio">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button layoutX="64.0" layoutY="140.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="242.0" text="Empréstimo">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="447.0" layoutY="140.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="242.0" text="Reserva">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Button>
+                           </children></AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="UsuariosTab" onSelectionChanged="#abrirVisualizarUsuarios" text="Usuários">
+                     <content>
+                        <AnchorPane fx:id="AcorUsuario">
+                           <children>
+                              <Button fx:id="visubutton" layoutX="113.0" layoutY="102.0" mnemonicParsing="false" onAction="#avrirViso4" prefHeight="89.0" prefWidth="134.0" text="Button" />
+                           </children></AnchorPane>
+                     </content></Tab>
+                  <Tab fx:id="LivrosTab" onSelectionChanged="#abrirVisualizarLivros" text="Livros" />
+                  <Tab text="Departamentos">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="nomeDepartamento" layoutX="121.0" layoutY="45.0" prefHeight="31.0" prefWidth="398.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="57.0" layoutY="45.0" text="Nome">
+                                 <font>
+                                    <Font name="Arial Narrow" size="25.0" />
+                                 </font>
+                              </Label>
+                              <Group layoutX="1.0" layoutY="32.0">
+                                 <children>
+                                    <Button fx:id="salvarDepartamento" layoutX="617.0" layoutY="345.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="135.0" text="Salvar">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="limparDepartamento" layoutX="382.0" layoutY="361.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" text="Limpar">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="visualizarDepartamentos" layoutX="493.0" layoutY="361.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="113.0" text="Visualizar">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </Group>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="CursosTab" onSelectionChanged="#AbrirVisualizarCursos" text="Cursos" />
+                  <Tab fx:id="SetupTab" disable="true" text="Acesso ao Sistema">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

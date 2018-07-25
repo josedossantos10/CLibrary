@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="ancorTabPerfil" minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PerfilUsuarioController">
+   <children>
+      <GridPane layoutX="40.0" layoutY="14.0" prefHeight="322.0" prefWidth="821.0">
+         <children>
+            <Label text="Dados Pessoais">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Nome" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="68.0" text="Rua" GridPane.rowIndex="8">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="22.0" text="Celular" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="22.0" text="Telefone" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="22.0" text="Matrícula" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="22.0" text="CPF" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCelular" layoutX="10.0" layoutY="68.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTelefone" layoutX="10.0" layoutY="22.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblMatricula" layoutX="10.0" layoutY="22.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCpf" layoutX="10.0" layoutY="22.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblNome1" layoutX="10.0" layoutY="22.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Dados do Endereço" GridPane.rowIndex="7">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblRuaNumeroBairro" layoutX="10.0" layoutY="293.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="16.0" text="Estado" GridPane.rowIndex="10">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="16.0" text="Cidade" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblEstado" layoutX="221.0" layoutY="293.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCidade" layoutX="10.0" layoutY="16.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Arial Narrow" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblValorDebitos" layoutX="10.0" layoutY="38.0" text="999,00" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="38.0" />
+               </font>
+            </Label>
+            <Label layoutX="157.0" layoutY="12.0" text="Débitos R$" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Arial Bold" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="652.0" layoutY="11.0" text="Situação" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Arial Bold" size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblSituacao" textAlignment="RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" prefWidth="180.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="531.0" minWidth="10.0" prefWidth="485.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="516.0" minWidth="10.0" prefWidth="149.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Button layoutX="415.0" layoutY="401.0" mnemonicParsing="false" onAction="#atualizarTabPerfil" prefHeight="38.0" prefWidth="140.0" text="Atualizar">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

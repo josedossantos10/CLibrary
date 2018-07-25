@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="CadastrarUsuarioPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastroUsuariosController">
+   <children>
+      <Group layoutX="-34.0" layoutY="19.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="300.0">
+         <children>
+            <Button fx:id="voltarCadastro" layoutX="246.0" layoutY="359.0" mnemonicParsing="false" onAction="#abrirVisualizarUsuarios" prefHeight="35.0" prefWidth="113.0" text="Voltar" AnchorPane.bottomAnchor="10.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="limparUsuario" layoutX="369.0" layoutY="358.0" mnemonicParsing="false" onAction="#limparCampos" prefHeight="35.0" prefWidth="99.0" text="Limpar" AnchorPane.bottomAnchor="10.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="SalvarUsuario" layoutX="478.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleSalvarUsuario" prefHeight="60.0" prefWidth="135.0" text="Salvar" AnchorPane.bottomAnchor="10.0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </Group>
+      <ToggleButton fx:id="professorOrAlunoUsuario" layoutX="51.0" layoutY="15.0" mnemonicParsing="false" onAction="#ativarProfessor" text="É Professor" />
+      <Group focusTraversable="true" layoutX="37.0" layoutY="1.0">
+         <children>
+            <TextField fx:id="nomeUsuario" layoutX="116.0" layoutY="58.0" prefHeight="31.0" prefWidth="398.0" promptText="Insira seu nome">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="cpfUsuario" layoutX="116.0" layoutY="94.0" prefHeight="31.0" prefWidth="148.0" promptText="Insira seu CPF">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="matriculaUsuario" layoutX="366.0" layoutY="95.0" prefHeight="31.0" prefWidth="148.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="emailUsuario" layoutX="116.0" layoutY="130.0" prefHeight="31.0" prefWidth="399.0" promptText="seuemail@seuprovedor.com">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="telefoneUsuario" layoutX="116.0" layoutY="167.0" prefHeight="31.0" prefWidth="148.0" promptText="DDD 1234 5678">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="celularUsuario" layoutX="366.0" layoutY="167.0" prefHeight="31.0" prefWidth="148.0" promptText="DDD 9 1111 2222">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="senhaUsuario" layoutX="116.0" layoutY="204.0" prefHeight="31.0" prefWidth="398.0" promptText="Digite uma senha">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </PasswordField>
+         </children>
+      </Group>
+      <Group layoutX="37.0" layoutY="1.0">
+         <children>
+            <TextField fx:id="ruaUsuario" layoutX="116.0" layoutY="261.0" prefHeight="31.0" prefWidth="248.0" promptText="Insira o nome  da sua Rua">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="numeroCasaUsuario" layoutX="407.0" layoutY="262.0" prefHeight="31.0" prefWidth="103.0" promptText="Num. da casa">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="bairroUsuario" layoutX="116.0" layoutY="301.0" prefHeight="31.0" prefWidth="154.0" promptText="Insira seu bairro">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="cidadeUsuario" layoutX="350.0" layoutY="301.0" prefHeight="31.0" prefWidth="160.0" promptText="Insira sua cidade">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+         </children>
+      </Group>
+      <Group layoutX="37.0" layoutY="1.0">
+         <children>
+            <Label layoutX="14.0" layoutY="58.0" text="Nome">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="94.0" text="CPF">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="131.0" text="E-mail">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="168.0" text="Telefone">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Group layoutX="37.0" layoutY="1.0">
+         <children>
+            <Label layoutX="274.0" layoutY="95.0" text="Matrícula">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="274.0" layoutY="168.0" text="Celular">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Label disable="true" layoutX="153.0" layoutY="14.0" text="Selecione um departamento">
+         <font>
+            <Font name="Arial Narrow" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="262.0" text="Rua">
+         <font>
+            <Font name="Arial Narrow" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="409.0" layoutY="263.0" text="Nº">
+         <font>
+            <Font name="Arial Narrow" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="53.0" layoutY="302.0" text="Bairro">
+         <font>
+            <Font name="Arial Narrow" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="315.0" layoutY="302.0" text="Cidade">
+         <font>
+            <Font name="Arial Narrow" size="25.0" />
+         </font>
+      </Label>
+      <Separator layoutX="-2.0" layoutY="246.0" prefHeight="11.0" prefWidth="900.0" />
+      <ComboBox fx:id="selecDepartamentoUsuario" disable="true" layoutX="367.0" layoutY="13.0" prefHeight="31.0" prefWidth="184.0" promptText="Escolha um Departamento" />
+      <Label layoutX="53.0" layoutY="206.0" text="Senha">
+         <font>
+            <Font name="Arial Narrow" size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

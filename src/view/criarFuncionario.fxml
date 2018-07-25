@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="CadastrarUsuarioPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CriarFuncionarioController">
+   <children>
+      <ImageView fitHeight="484.0" fitWidth="898.0" layoutX="-1.0" layoutY="-44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="recursos/imagens/fundo-nf.jpg" />
+         </image>
+      </ImageView>
+      <Group layoutX="21.0" layoutY="-69.0" AnchorPane.bottomAnchor="65.0" AnchorPane.rightAnchor="66.0">
+         <children>
+            <Button layoutX="369.0" layoutY="358.0" mnemonicParsing="false" onAction="#limparCamposF" prefHeight="35.0" prefWidth="99.0" text="Limpar" AnchorPane.bottomAnchor="10.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="478.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleSalvarFuncionario" prefHeight="60.0" prefWidth="135.0" text="Salvar" AnchorPane.bottomAnchor="10.0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </Group>
+      <Group focusTraversable="true" layoutX="31.0" layoutY="80.0">
+         <children>
+            <TextField fx:id="nomeUsuario" layoutX="116.0" layoutY="58.0" prefHeight="31.0" prefWidth="398.0" promptText="Insira seu nome">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="cpfUsuario" layoutX="116.0" layoutY="94.0" prefHeight="31.0" prefWidth="148.0" promptText="Insira seu CPF">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="matriculaUsuario" layoutX="366.0" layoutY="95.0" prefHeight="31.0" prefWidth="148.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="senhaUsuario" layoutX="116.0" layoutY="131.0" prefHeight="31.0" prefWidth="398.0" promptText="Digite uma senha">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </PasswordField>
+         </children>
+      </Group>
+      <Group layoutX="31.0" layoutY="80.0">
+         <children>
+            <Label layoutX="14.0" layoutY="58.0" text="Nome">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="94.0" text="CPF">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="131.0" text="Senha">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Group layoutX="31.0" layoutY="80.0">
+         <children>
+            <Label layoutX="274.0" layoutY="95.0" text="Matrícula">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Label layoutX="100.0" layoutY="46.0" prefHeight="41.0" prefWidth="396.0" text="Cadastar um novo Funcionário" wrapText="true">
+         <font>
+            <Font name="Arial Narrow" size="35.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,9 @@
+<Rules>
+  <sytemName>Bem-vindo ao Sistema de Gerenciamento da Biblioteca da Califonia University</sytemName>
+  <diasEmprestimoProfessor>14</diasEmprestimoProfessor>
+  <diasEmprestimoAluno>10</diasEmprestimoAluno>
+  <limiteEmprestimoProfessor>5</limiteEmprestimoProfessor>
+  <limiteEmprestimoAluno>3</limiteEmprestimoAluno>
+  <valorMulta>1.0</valorMulta>
+  <diasParaSuspencao>30</diasParaSuspencao>
+</Rules>

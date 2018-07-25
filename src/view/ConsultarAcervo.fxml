@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="AncorConsultaLivrosTab" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ConsultarAcervoController">
+   <children>
+      <GridPane alignment="BOTTOM_LEFT" layoutX="38.0" layoutY="82.0" prefHeight="352.0" prefWidth="721.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="70.0">
+         <children>
+            <Label fx:id="posicao11" underline="true" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao2" underline="true" wrapText="true" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao5" underline="true" wrapText="true" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao6" layoutX="10.0" layoutY="134.0" underline="true" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao3" layoutX="191.0" layoutY="134.0" underline="true" wrapText="true" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao9" layoutX="371.0" layoutY="46.0" underline="true" wrapText="true" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao7" layoutX="10.0" layoutY="46.0" underline="true" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao10" layoutX="10.0" layoutY="222.0" underline="true" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao13" layoutX="371.0" layoutY="222.0" underline="true" wrapText="true" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao12" layoutX="10.0" layoutY="46.0" underline="true" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao14" layoutX="10.0" layoutY="46.0" underline="true" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao1" layoutX="371.0" layoutY="310.0" underline="true" wrapText="true">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao4" layoutX="551.0" layoutY="310.0" underline="true" wrapText="true" GridPane.columnIndex="3">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao8" layoutX="551.0" layoutY="46.0" underline="true" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao15" layoutX="191.0" layoutY="310.0" underline="true" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="posicao16" layoutX="371.0" layoutY="310.0" underline="true" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Arial Narrow" size="25.0" />
+               </font>
+            </Label>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Group layoutX="-74.0" layoutY="12.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="299.5986328125" AnchorPane.rightAnchor="299.4013671875">
+         <children>
+            <Button fx:id="btnAnterior" layoutX="374.0" layoutY="449.0" mnemonicParsing="false" onAction="#carregarPaginaAnterior" text="&lt;-- Anterior">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProximo" layoutX="479.0" layoutY="449.0" mnemonicParsing="false" onAction="#carregarProximaPagina" text="Próximo --&gt;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Group>
+      <Group layoutX="91.0" layoutY="-16.0">
+         <children>
+            <Button layoutX="607.0" layoutY="26.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="91.0" text="Pesquisar" />
+            <TextField layoutX="387.0" layoutY="26.0" prefHeight="43.0" prefWidth="211.0" promptText="Insira um termo para sua pesquisa" />
+         </children>
+      </Group>
+   </children>
+</AnchorPane>

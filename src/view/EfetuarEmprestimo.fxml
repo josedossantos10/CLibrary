@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="AncorEfetuaEmprestimo" prefHeight="450.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EfetuarEmprestimoController">
+   <children>
+      <Label fx:id="titulo" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="2.0" layoutY="17.0" prefHeight="36.0" prefWidth="283.0" text="Realizar Empréstimo" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font name="Arial Narrow" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="75.0" text="Selecione Usuário">
+         <font>
+            <Font name="Arial Narrow" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="169.0" text="Selecione o Livro">
+         <font>
+            <Font name="Arial Narrow" size="25.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="boxUsuario" layoutX="34.0" layoutY="109.0" prefHeight="45.0" prefWidth="215.0" promptText="Escolha um usuario" />
+      <ComboBox fx:id="boxLivro" layoutX="34.0" layoutY="209.0" prefHeight="45.0" prefWidth="215.0" promptText="Selecione um apenas livro" />
+      <Group AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <Button layoutX="502.0" layoutY="394.0" mnemonicParsing="false" onAction="#devolverEmprestimo" prefHeight="44.0" prefWidth="111.0" text="Devolver">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnAtualizar" cancelButton="true" layoutX="622.0" layoutY="394.0" mnemonicParsing="false" onAction="#carregarDados" prefHeight="44.0" prefWidth="125.0" text="Atualizar">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnConcluido" layoutX="756.0" layoutY="394.0" mnemonicParsing="false" onAction="#voltar" prefHeight="44.0" prefWidth="127.0" text="Reservas">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </Group>
+      <TableView fx:id="tabelaEmprestimos" layoutX="345.0" layoutY="17.0" prefHeight="347.0" prefWidth="549.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
+        <columns>
+          <TableColumn fx:id="colunaId" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" resizable="false" text="ID" />
+          <TableColumn fx:id="colunaUsuario" maxWidth="250.0" minWidth="130.0" prefWidth="150.0" text="Usuario" />
+            <TableColumn fx:id="colunaDataInicio" maxWidth="150.0" minWidth="100.0" prefWidth="60.0" text="Data Empestimo" />
+            <TableColumn fx:id="colunaDFim" maxWidth="150.0" minWidth="115.0" prefWidth="106.0" text="Data para Entregar" />
+            <TableColumn fx:id="colunaStatus" maxWidth="100.0" minWidth="70.0" prefWidth="60.0" text="Status" />
+            <TableColumn fx:id="colunaLivros" editable="false" minWidth="150.0" prefWidth="-1.0" text="Livro" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Button fx:id="btnEfetuar" layoutX="70.0" layoutY="279.0" mnemonicParsing="false" onAction="#efetuarEmprestimo" prefHeight="60.0" prefWidth="135.0" text="Efetuar">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <CheckBox fx:id="checkEmAtraso" layoutX="270.0" layoutY="371.0" mnemonicParsing="false" onAction="#EmAtrasoFilter" text="Em Atraso">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </CheckBox>
+   </children>
+</AnchorPane>

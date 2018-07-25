@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="AncorLivros" prefHeight="450.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VisualizarLivrosController">
+   <children>
+      <ProgressIndicator disable="true" layoutX="362.0" prefHeight="448.0" prefWidth="766.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <TableView fx:id="tabelaLivro" layoutY="63.0" prefHeight="320.0" prefWidth="597.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0">
+         <columns>
+            <TableColumn fx:id="columTitulo" prefWidth="406.0" text="Titulo" />
+            <TableColumn fx:id="columAno" editable="false" minWidth="0.0" prefWidth="136.0" text="Ano" />
+            <TableColumn fx:id="columQuantidade" minWidth="3.0" prefWidth="87.0" text="Quantidade" />
+            <TableColumn fx:id="columCodigo" prefWidth="132.0" text="Codigo" />
+         </columns>
+      </TableView>
+      <Label fx:id="titulo" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="219.0" layoutY="14.0" prefHeight="36.0" prefWidth="448.0" text="Visualizar Livros Cadastrados" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font name="Arial Narrow" size="30.0" />
+         </font>
+      </Label>
+      <Group layoutX="108.0" layoutY="25.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="250.0">
+         <children>
+            <Button fx:id="btnExcluirLivro" layoutX="299.0" layoutY="393.0" mnemonicParsing="false" onAction="#excluirLivro" prefHeight="41.0" prefWidth="85.0" text="Excluir">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <InnerShadow choke="0.42" color="#d02313" height="15.07" radius="29.2725" width="104.02" />
+               </effect>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnNovoLivro" layoutX="108.0" layoutY="393.0" mnemonicParsing="false" onAction="#abrirCadastrarLivro" prefHeight="41.0" prefWidth="85.0" text="Novo">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnEditarLivro" layoutX="203.0" layoutY="393.0" mnemonicParsing="false" onAction="#abrirEditarLivro" prefHeight="41.0" prefWidth="85.0" text="Editar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnAtualizarLivro" layoutX="394.0" layoutY="393.0" mnemonicParsing="false" onAction="#carregarDados" prefHeight="41.0" prefWidth="85.0" text="Atualizar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VerCaixaController">
+   <children>
+      <Label layoutX="176.0" layoutY="286.0" text="Valor Total: R$">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="valor" layoutX="369.0" layoutY="286.0" text="0,00">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="data" layoutX="199.0" layoutY="105.0" prefHeight="36.0" prefWidth="202.0" promptText="Selecione o dia" />
+      <Button layoutX="148.0" layoutY="151.0" mnemonicParsing="false" onAction="#realizarConsulta" text="Consultar Total">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Label layoutX="198.0" layoutY="14.0" text="Consultar Caixa">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button layoutX="314.0" layoutY="151.0" mnemonicParsing="false" onAction="#expExcel" text="Exportar para Excel">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

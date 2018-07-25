@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="AncorUsuarios" prefHeight="450.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VisualizarUsuariosController">
+   <children>
+      <Group layoutX="113.0" layoutY="-9.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="221.0" />
+      <ProgressIndicator disable="true" layoutX="362.0" prefHeight="448.0" prefWidth="766.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <TableView fx:id="tabelaUsuarios" layoutY="103.0" prefHeight="277.0" prefWidth="880.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="103.0">
+         <columns>
+            <TableColumn fx:id="columnNome" prefWidth="255.0" text="Nome" />
+            <TableColumn fx:id="columnCpf" editable="false" minWidth="0.0" prefWidth="129.0" text="CPF" />
+            <TableColumn fx:id="columnTipo" prefWidth="106.0" text="Tipo" />
+            <TableColumn fx:id="columnRuaNun" prefWidth="221.0" text="Email" />
+            <TableColumn fx:id="columnStatus" prefWidth="100.0" text="Status" />
+            <TableColumn fx:id="columnDebito" prefWidth="74.0" text="Débitos" />
+         </columns>
+      </TableView>
+      <Label fx:id="titulo" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="219.0" layoutY="14.0" prefHeight="36.0" prefWidth="448.0" text="Visualizar Usuário Cadastrados" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font name="Arial Narrow" size="30.0" />
+         </font>
+      </Label>
+      <Group layoutX="-27.0" nodeOrientation="LEFT_TO_RIGHT" AnchorPane.bottomAnchor="356.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <TextField fx:id="stringBusca" layoutX="314.0" layoutY="50.0" onKeyReleased="#buscarUsuariosAutomatico" prefHeight="43.0" prefWidth="228.0" promptText="Insira um termo para sua pesquisa" />
+            <Button fx:id="btnX" cancelButton="true" layoutX="513.0" layoutY="59.0" mnemonicParsing="false" onAction="#carregarDados" opacity="0.6" prefHeight="25.0" prefWidth="14.0" text="x" />
+            <Button fx:id="btnPesquisar" contentDisplay="CENTER" defaultButton="true" layoutX="546.0" layoutY="50.0" mnemonicParsing="false" onAction="#buscarUsuarios" prefHeight="43.0" prefWidth="91.0" text="Pesquisar" textAlignment="CENTER" />
+         </children>
+      </Group>
+      <Group layoutX="203.0" layoutY="3.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="219.0" AnchorPane.rightAnchor="215.0">
+         <children>
+            <Button fx:id="excluirUsuarios" layoutX="410.0" layoutY="395.0" mnemonicParsing="false" onAction="#excluirUsuario" prefHeight="41.0" prefWidth="85.0" text="Excluir">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <effect>
+                  <InnerShadow choke="0.42" color="#d02313" height="15.07" radius="29.2725" width="104.02" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="atualizarUsuarios" layoutX="505.0" layoutY="395.0" mnemonicParsing="false" onAction="#atualizarUsuarios" prefHeight="41.0" prefWidth="85.0" text="Atualizar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="207.0" layoutY="395.0" mnemonicParsing="false" onAction="#pagarDebitos" prefHeight="41.0" prefWidth="85.0" text="Pagar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="303.0" layoutY="395.0" mnemonicParsing="false" onAction="#suspenderUsuario" prefHeight="41.0" prefWidth="97.0" text="Suspender Ativar" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Button>
+            <Button fx:id="editarUsuarios1" layoutX="112.0" layoutY="395.0" mnemonicParsing="false" onAction="#editarUsuarios" prefHeight="41.0" prefWidth="85.0" text="Editar">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="novoUsuario1" layoutX="16.0" layoutY="395.0" mnemonicParsing="false" onAction="#abrirCadastro" prefHeight="41.0" prefWidth="85.0" text="Novo">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </Group>
+      <CheckBox fx:id="checkSuspendidos" layoutX="199.0" layoutY="59.0" mnemonicParsing="false" onAction="#suspendiosFilter" prefHeight="27.0" prefWidth="112.0" text="Suspensos">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+   </children>
+</AnchorPane>
