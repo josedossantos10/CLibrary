@@ -6,11 +6,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import model.Exemplar;
+import model.vo.Exemplar;
 
 public class ExemplarDAO {
 
-    public void salvar(Exemplar a) {
+    public void salvar(Exemplar a) throws Exception {
         EntityManager em = getEm();
         try {
             em.getTransaction().begin();
@@ -27,7 +27,7 @@ public class ExemplarDAO {
         }
     }
 
-    public List<Exemplar> listarTodos() {
+    public List<Exemplar> listarTodos() throws Exception {
         EntityManager em = getEm();
         List<Exemplar> exemplares;
 
@@ -50,7 +50,7 @@ public class ExemplarDAO {
 
     }
 
-    public List<Exemplar> busca(String str) {
+    public List<Exemplar> busca(String str) throws Exception {
         EntityManager em = getEm();
         List<Exemplar> exemplares;
         String query = "select e from Exemplar e join e.autores a where LOWER(a.nome) like :string or LOWER(e.titulo) like :string OR LOWER(e.editora) like :string ";
@@ -89,7 +89,7 @@ public class ExemplarDAO {
         return null;
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -108,7 +108,7 @@ public class ExemplarDAO {
         }
     }
     
-  public EntityManager getEm() {
+  public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
 

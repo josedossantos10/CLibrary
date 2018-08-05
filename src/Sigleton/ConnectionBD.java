@@ -10,15 +10,9 @@ public class ConnectionBD {
     private ConnectionBD() {
     }
 
-    public static EntityManagerFactory getConnection() {
+    public static synchronized EntityManagerFactory getConnection() throws Exception{
         if (factory == null) {
-            try {
-
-                factory = Persistence.createEntityManagerFactory("CULibraryPU");
-            } catch (Exception e) {
-                System.out.println("Erro ao abrir o Factory: " + e.getMessage());
-
-            }
+            factory = Persistence.createEntityManagerFactory("CULibraryPU");
         }
         return factory;
     }

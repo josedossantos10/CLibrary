@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,27 +23,31 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
-import model.Caixa;
+import model.vo.Caixa;
 import model.DAO.CaixaDAO;
 import model.DAO.UsuarioDAO;
-import model.Usuario;
+import model.vo.Usuario;
 import model.nativeQueries.Views;
-import view.MessageBox;
+import view.Fachada;
 
 public class VisualizarUsuariosController implements Initializable {
 
     List<Usuario> usuarios;
     ObservableList<Usuario> uOL;
     UsuarioDAO DAO = new UsuarioDAO();
-    MessageBox box = new MessageBox();
+    Fachada box = new Fachada();
     Views v = new Views();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        carregarDados();
+        try {
+            carregarDados();
+        } catch (Exception ex) {
+            Fachada.exibrirErro(ex.getMessage());
+        }
     }
 
-    public void carregarDados() {
+    public void carregarDados() throws Exception {
         checkSuspendidos.setSelected(false);
         stringBusca.setDisable(false);
         btnPesquisar.setDisable(false);
@@ -117,7 +123,7 @@ public class VisualizarUsuariosController implements Initializable {
     }
 
     @FXML
-    void excluirUsuario() {
+    void excluirUsuario() throws Exception {
         Usuario u = tabelaUsuarios.getSelectionModel().getSelectedItem();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Excluir?");
@@ -132,7 +138,7 @@ public class VisualizarUsuariosController implements Initializable {
     }
 
     @FXML
-    void editarUsuarios() throws IOException {
+    void editarUsuarios() throws Exception {
         //   Usuario u = tabelaUsuarios.getSelectionModel().getSelectedItem();
         //  u.setEndereco(u.g);
         Usuario u = DAO.buscarPorCpf(tabelaUsuarios.getSelectionModel().getSelectedItem().getCpf());
@@ -147,7 +153,7 @@ public class VisualizarUsuariosController implements Initializable {
     }
 
     @FXML
-    void suspenderUsuario() {
+    void suspenderUsuario() throws Exception {
 //        Usuario u = tabelaUsuarios.getSelectionModel().getSelectedItem();
         Usuario u = DAO.buscarPorCpf(tabelaUsuarios.getSelectionModel().getSelectedItem().getCpf());
 
@@ -169,13 +175,13 @@ public class VisualizarUsuariosController implements Initializable {
     }
 
     @FXML
-    void atualizarUsuarios() {
+    void atualizarUsuarios() throws Exception {
         carregarDados();
 
     }
 
     @FXML
-    void pagarDebitos() {
+    void pagarDebitos() throws Exception {
         Caixa c = new Caixa();
         Usuario u = DAO.buscarPorID(tabelaUsuarios.getSelectionModel().getSelectedItem().getId());
         if (u != null) {
@@ -195,7 +201,7 @@ public class VisualizarUsuariosController implements Initializable {
     }
 
     @FXML
-    void buscarUsuarios() {
+    void buscarUsuarios() throws Exception {
         usuarios = DAO.busca(stringBusca.getText());
         uOL = FXCollections.observableArrayList(usuarios);
         tabelaUsuarios.setItems(uOL);
@@ -203,7 +209,7 @@ public class VisualizarUsuariosController implements Initializable {
     }
 
     @FXML
-    void buscarUsuariosAutomatico() {
+    void buscarUsuariosAutomatico() throws Exception {
         if (stringBusca.getText().length() > 2) {
             usuarios = DAO.busca(stringBusca.getText());
             uOL = FXCollections.observableArrayList(usuarios);
@@ -214,7 +220,7 @@ public class VisualizarUsuariosController implements Initializable {
     }
 
     @FXML
-    void suspendiosFilter() {
+    void suspendiosFilter() throws Exception {
         if (checkSuspendidos.isSelected()) {
             usuarios = v.listarUsuariosSuspendidos();
             System.out.println("\nArray Usuarios " + usuarios.size());

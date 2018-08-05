@@ -1,4 +1,4 @@
-package model;
+package model.vo;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

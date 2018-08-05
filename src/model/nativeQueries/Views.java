@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import model.Emprestimo;
-import model.Exemplar;
-import model.Usuario;
+import model.vo.Emprestimo;
+import model.vo.Exemplar;
+import model.vo.Usuario;
 
 public class Views {
 
-    public List<Exemplar> listarExemplares() {
+    public List<Exemplar> listarExemplares() throws Exception {
         EntityManager em = getEm();
         List<Exemplar> exemplares;
         try {
@@ -29,7 +29,7 @@ public class Views {
         return exemplares;
     }
 
-    public List<Usuario> listarUsuariosSuspendidos() {
+    public List<Usuario> listarUsuariosSuspendidos() throws Exception {
         EntityManager em = getEm();
         List<Usuario> usuarios;
 
@@ -51,7 +51,7 @@ public class Views {
         return usuarios;
     }
 
-    public List<Emprestimo> listarEmprestimosAtrasados() {
+    public List<Emprestimo> listarEmprestimosAtrasados() throws Exception {
         EntityManager em = getEm();
         List<Emprestimo> emprestimos;
 
@@ -71,7 +71,7 @@ public class Views {
         return emprestimos;
     }
 
-    public List<Usuario> listarUsuarios() {
+    public List<Usuario> listarUsuarios() throws Exception {
         EntityManager em = getEm();
         List<Usuario> usuarios;
 
@@ -91,7 +91,7 @@ public class Views {
         return usuarios;
     }
 
-    public EntityManager getEm() {
+    public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
 

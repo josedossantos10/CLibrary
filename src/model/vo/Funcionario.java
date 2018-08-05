@@ -1,4 +1,4 @@
-package model;
+package model.vo;
 
 import java.io.Serializable;
 import javax.persistence.Column;

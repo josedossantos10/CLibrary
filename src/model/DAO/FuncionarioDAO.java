@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import model.Funcionario;
+import model.vo.Funcionario;
 
 public class FuncionarioDAO {
     
-     public void salvar(Funcionario a) {
+     public void salvar(Funcionario a) throws Exception {
         EntityManager em = getEm();
         try {
                 em.getTransaction().begin();
@@ -26,7 +26,7 @@ public class FuncionarioDAO {
         }
     }
     
-     public List<Funcionario> listarTodos() {
+     public List<Funcionario> listarTodos() throws Exception {
         EntityManager em = getEm();
         List<Funcionario> funcionario;
 
@@ -47,7 +47,7 @@ public class FuncionarioDAO {
         return funcionario;
     }
      
-      public Funcionario buscarPorCpf(String cpf) {
+      public Funcionario buscarPorCpf(String cpf) throws Exception {
         EntityManager em = getEm();
         Funcionario f;        
       
@@ -68,7 +68,7 @@ public class FuncionarioDAO {
         return null;
     }
       
-  public EntityManager getEm() {
+  public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
 

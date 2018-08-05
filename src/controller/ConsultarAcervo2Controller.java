@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,10 +17,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.DAO.ExemplarDAO;
 import model.DAO.ReservaDAO;
-import model.Exemplar;
-import model.Reserva;
+import model.vo.Exemplar;
+import model.vo.Reserva;
 import model.nativeQueries.Views;
-import view.MessageBox;
+import view.Fachada;
 
 public class ConsultarAcervo2Controller implements Initializable {
 
@@ -26,17 +28,21 @@ public class ConsultarAcervo2Controller implements Initializable {
     ExemplarDAO dAO = new ExemplarDAO();
     Views views = new Views();
     ObservableList<Exemplar> oExempplares;
-    MessageBox box = new MessageBox();
+    Fachada box = new Fachada();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        carregarDados();
+        try {
+            carregarDados();
+        } catch (Exception ex) {
+            Fachada.exibrirErro(ex.getMessage());
+        }
 
     }
 
     @FXML
-    void reservarLivro() {
+    void reservarLivro() throws Exception {
         ReservaDAO reservaDAO = new ReservaDAO();
         Exemplar rExemplar;
         ExemplarDAO rExemplarDAO = new ExemplarDAO();
@@ -80,13 +86,13 @@ public class ConsultarAcervo2Controller implements Initializable {
             }
 
         } else {
-            MessageBox.exibrirMensagemErroS("Desculpe", "Não foi possivel encontrar seu perfil!\n Tente logar novamente!");
+            Fachada.exibrirMensagemErroS("Desculpe", "Não foi possivel encontrar seu perfil!\n Tente logar novamente!");
         }
 
     }
 
     @FXML
-    void buscarExemplares() {
+    void buscarExemplares() throws Exception {
         if (stringBusca.getText().length() > 2) {
             exeplares = dAO.busca(stringBusca.getText());
             oExempplares = FXCollections.observableArrayList(exeplares);
@@ -97,7 +103,7 @@ public class ConsultarAcervo2Controller implements Initializable {
     }
 
     @FXML
-    void carregarDados() {
+    void carregarDados() throws Exception {
         stringBusca.clear();
         columQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade_disponivel"));
         columTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));

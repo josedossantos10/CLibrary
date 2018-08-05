@@ -1,4 +1,4 @@
-package model;
+package model.vo;
 
 import config.Data;
 import java.io.Serializable;

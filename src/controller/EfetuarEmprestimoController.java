@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,11 +33,11 @@ import javafx.util.Callback;
 import model.DAO.EmprestimoDAO;
 import model.DAO.ExemplarDAO;
 import model.DAO.UsuarioDAO;
-import model.Emprestimo;
-import model.Exemplar;
-import model.Usuario;
+import model.vo.Emprestimo;
+import model.vo.Exemplar;
+import model.vo.Usuario;
 import model.nativeQueries.Views;
-import view.MessageBox;
+import view.Fachada;
 
 public class EfetuarEmprestimoController implements Initializable {
 
@@ -46,17 +48,21 @@ public class EfetuarEmprestimoController implements Initializable {
     Calendar data = Calendar.getInstance();
     DateFormat dfLong = DateFormat.getDateInstance(DateFormat.FULL);
     DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
-    MessageBox box = new MessageBox();
+    Fachada box = new Fachada();
     Views v = new Views();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        carregarDados();
+        try {
+            carregarDados();
+        } catch (Exception ex) {
+            Fachada.exibrirErro(ex.getMessage());
+        }
 
     }
 
     @FXML
-    void EmAtrasoFilter() {
+    void EmAtrasoFilter() throws Exception {
         if (checkEmAtraso.isSelected()) {
 
             emprestimos = v.listarEmprestimosAtrasados();
@@ -82,7 +88,7 @@ public class EfetuarEmprestimoController implements Initializable {
     }
 
     @FXML
-    void efetuarEmprestimo() throws ParseException {
+    void efetuarEmprestimo() throws ParseException, Exception {
 
         if (MainPageController.atualF != null) {
             Usuario u = boxUsuario.getValue();
@@ -110,24 +116,24 @@ public class EfetuarEmprestimoController implements Initializable {
                             box.exibrirMensagemErro("Operação não realizada", "Você já possui esse livro em um Empréstimo.", "Para realizar um novo empréstimo desse livro, primeiro realize a devolução do mesmo e refaça o emprétimo.");
                         }
                     } else {
-                        MessageBox.exibrirMensagemErroS("Operação não realizada", "Limite de empréstimos atingido.");
+                        Fachada.exibrirMensagemErroS("Operação não realizada", "Limite de empréstimos atingido.");
                     }
                 } else {
-                    MessageBox.exibrirMensagemErroS("Operação impossível", "Ocorreram um ou mais erros que não permitiram realizar esse empréstimo.\n Verifique se esse livro ainda esta disponível ou se a sua conta de usuário não está suspensa e tente novamente.");
+                    Fachada.exibrirMensagemErroS("Operação impossível", "Ocorreram um ou mais erros que não permitiram realizar esse empréstimo.\n Verifique se esse livro ainda esta disponível ou se a sua conta de usuário não está suspensa e tente novamente.");
                 }
             } else {
-                MessageBox.exibrirMensagemErroS("Erro!", "Selecione pelo menos um usuário e um exemplar disponível para realizar um empréstimo.");
+                Fachada.exibrirMensagemErroS("Erro!", "Selecione pelo menos um usuário e um exemplar disponível para realizar um empréstimo.");
 
             }
             carregarDados();
         } else {
-            MessageBox.exibrirMensagemErroS("Operação impossível", "Nenhum funcionário autorizado para esta função está logado. Tente novamente mais tarde.");
+            Fachada.exibrirMensagemErroS("Operação impossível", "Nenhum funcionário autorizado para esta função está logado. Tente novamente mais tarde.");
         }
 
     }
 
     @FXML
-    void devolverEmprestimo() {
+    void devolverEmprestimo() throws Exception {
 
         Emprestimo devolver = tabelaEmprestimos.getSelectionModel().getSelectedItem();
 
@@ -149,7 +155,7 @@ public class EfetuarEmprestimoController implements Initializable {
     }
 
     @FXML
-    void carregarDados() {
+    void carregarDados() throws Exception {
         boxLivro.getItems().clear();
         boxUsuario.getItems().clear();
 
@@ -294,7 +300,7 @@ public class EfetuarEmprestimoController implements Initializable {
 
     }
 
-    private boolean verificarEmprestimosAbertos(int id, Exemplar e) {
+    private boolean verificarEmprestimosAbertos(int id, Exemplar e) throws Exception {
 
         List<Emprestimo> ec = dao.buscarEmprestimosPorIdUsuario(id);
 

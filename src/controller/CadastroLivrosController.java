@@ -16,10 +16,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import model.Autor;
+import model.vo.Autor;
 import model.DAO.ExemplarDAO;
-import model.Exemplar;
-import view.MessageBox;
+import model.vo.Exemplar;
+import view.Fachada;
 
 public class CadastroLivrosController implements Initializable {
 
@@ -33,7 +33,7 @@ public class CadastroLivrosController implements Initializable {
     }
 
     @FXML
-    void salvarLivro() throws IOException {
+    void salvarLivro() throws IOException, Exception {
         e.setTitulo(tituloLivro.getText());
         e.setCodigo(Integer.parseInt(codigoLivro.getText()));
         e.setEditora(editoraLivro.getText());
@@ -43,7 +43,7 @@ public class CadastroLivrosController implements Initializable {
         }else{
             e.setQuantidade_disponivel(e.getQuantidade_disponivel()+(Integer.parseInt(quntidadeLivro.getText())-e.getQuantidade()));
         if(e.getQuantidade_disponivel()<0){
-            MessageBox.exibrirMensagemErroS("Alerta!", "A QUANTIDADE DISPONÍVEL É UM VALOR NEGATIVO.\nPODE OCORRER ANOMALIAS NO SISTEMA ENQUANTO ESSE VALOR NÃO SE TORNAR POSITIVO.");
+            Fachada.exibrirMensagemErroS("Alerta!", "A QUANTIDADE DISPONÍVEL É UM VALOR NEGATIVO.\nPODE OCORRER ANOMALIAS NO SISTEMA ENQUANTO ESSE VALOR NÃO SE TORNAR POSITIVO.");
         
         }
         }

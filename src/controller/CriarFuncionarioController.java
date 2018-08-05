@@ -8,7 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import model.nativeQueries.StoredProcedure;
-import view.MessageBox;
+import view.Fachada;
 
 public class CriarFuncionarioController implements Initializable {
 
@@ -27,9 +27,9 @@ public class CriarFuncionarioController implements Initializable {
     }
 
     @FXML
-    void handleSalvarFuncionario() {
+    void handleSalvarFuncionario() throws Exception {
         if((cpfUsuario.getLength()==0)||(matriculaUsuario.getLength()==0)||(nomeUsuario.getLength()==0)||(senhaUsuario.getLength()==0)){
-            MessageBox.exibrirMensagemErroS("Erro!", "Todos os campos devem estar corretamente preenchidos.");
+            Fachada.exibrirMensagemErroS("Erro!", "Todos os campos devem estar corretamente preenchidos.");
         }else{
         StoredProcedure sp = new StoredProcedure();
         sp.cadastrarFuncionario(cpfUsuario.getText(), Integer.parseInt(matriculaUsuario.getText()), nomeUsuario.getText(), senhaUsuario.getText());

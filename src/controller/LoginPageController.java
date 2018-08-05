@@ -15,20 +15,20 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.Aluno;
+import model.vo.Aluno;
 import model.DAO.AlunoDAO;
 import model.DAO.FuncionarioDAO;
 import model.DAO.ProfessorDAO;
-import model.Funcionario;
-import model.Professor;
-import model.Usuario;
+import model.vo.Funcionario;
+import model.vo.Professor;
+import model.vo.Usuario;
 import model.nativeQueries.StoredProcedure;
-import view.MessageBox;
+import view.Fachada;
 
 public class LoginPageController implements Initializable {
 
     public static Stage stage;
-    MessageBox box = new MessageBox();
+    Fachada box = new Fachada();
     StoredProcedure procedure = new StoredProcedure();
 
     @Override
@@ -38,7 +38,7 @@ public class LoginPageController implements Initializable {
     }
 
     @FXML
-    public void realizarLoginFuncionario() {
+    public void realizarLoginFuncionario() throws Exception {
         // barra.setVisible(true);
         FuncionarioDAO o = new FuncionarioDAO();
 
@@ -54,7 +54,7 @@ public class LoginPageController implements Initializable {
     }
 
     @FXML
-    void realizarLoginUsuario() {
+    void realizarLoginUsuario() throws Exception {
         AlunoDAO ao = new AlunoDAO();
         Aluno a = ao.buscarPorCpf(login.getText());
         if (!(a != null)) {

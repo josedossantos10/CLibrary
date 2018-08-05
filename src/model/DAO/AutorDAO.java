@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import model.Autor;
+import model.vo.Autor;
 
 class AutorDAO {
 
-    public void salvar(Autor a) {
+    public void salvar(Autor a) throws Exception {
         EntityManager em = getEm();
         try {
             em.getTransaction().begin();
@@ -25,7 +25,7 @@ class AutorDAO {
         }
     }
     
-        public void delete(int id) {
+        public void delete(int id) throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -44,7 +44,7 @@ class AutorDAO {
 
     }
         
-         public List<Autor> listarTodos() {
+         public List<Autor> listarTodos() throws Exception {
         EntityManager em = getEm();
         List<Autor> autor;
 
@@ -65,7 +65,7 @@ class AutorDAO {
         return autor;
     }
          
-  public EntityManager getEm() {
+  public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
 

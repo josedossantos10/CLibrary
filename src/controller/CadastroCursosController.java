@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +14,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import model.Curso;
+import model.vo.Curso;
 import model.DAO.CursoDAO;
 import model.DAO.DepartamentoDAO;
-import model.Departamento;
+import model.vo.Departamento;
+import view.Fachada;
 
 public class CadastroCursosController implements Initializable {
 
@@ -25,7 +28,11 @@ public class CadastroCursosController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        atualizarDepartamentos();
+        try {
+            atualizarDepartamentos();
+        } catch (Exception ex) {
+            Fachada.exibrirErro(ex.getMessage());
+        }
 
     }
 
@@ -45,7 +52,7 @@ public class CadastroCursosController implements Initializable {
     }
 
     @FXML
-    void salvarDepartamento() {
+    void salvarDepartamento() throws Exception {
         Departamento d = new Departamento();
         d.setNome(nomeDepartamento.getText());
         o.salvar(d);
@@ -54,7 +61,7 @@ public class CadastroCursosController implements Initializable {
     }
 
     @FXML
-    void salvarCurso(ActionEvent event) {
+    void salvarCurso(ActionEvent event) throws Exception {
         c.setNome(nomeCurso.getText());
         c.setCurso_departamento(selecDepartamentoCurso.getValue());
         selecDepartamentoCurso.getValue().getCursos().add(c);
@@ -71,7 +78,7 @@ public class CadastroCursosController implements Initializable {
 
     }
 
-    private void atualizarDepartamentos() {
+    private void atualizarDepartamentos() throws Exception {
         selecDepartamentoCurso.getItems().clear();
 
         //ObservableList<Departamento> uOL = FXCollections.observableArrayList(dptos);

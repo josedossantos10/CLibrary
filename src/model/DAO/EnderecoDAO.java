@@ -2,11 +2,11 @@ package model.DAO;
 
 import Sigleton.ConnectionBD;
 import javax.persistence.EntityManager;
-import model.Endereco;
+import model.vo.Endereco;
 
 public class EnderecoDAO {
 
-    public void salvar(Endereco a) {
+    public void salvar(Endereco a) throws Exception {
         EntityManager em = getEm();
         try {
               em.getTransaction().begin();
@@ -23,7 +23,7 @@ public class EnderecoDAO {
         }
     }
 
-       public Endereco find(int i) {
+       public Endereco find(int i) throws Exception {
         EntityManager em = getEm();
         Endereco a = new Endereco();
         
@@ -39,7 +39,7 @@ public class EnderecoDAO {
         return a;
        }
     
-   public EntityManager getEm() {
+   public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
 

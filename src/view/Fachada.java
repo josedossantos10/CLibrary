@@ -4,13 +4,21 @@ package view;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
-public class MessageBox {
+public class Fachada {
     
   
     public static void exibrirMensagemErroS(String titulo, String msg) {
         
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setTitle(titulo);
+        a.setHeaderText(msg);
+        a.showAndWait();
+
+    }
+    public static void exibrirErro(String msg) {
+        
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle("Erro!");
         a.setHeaderText(msg);
         a.showAndWait();
 

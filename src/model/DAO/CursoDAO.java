@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import model.Curso;
+import model.vo.Curso;
 
 public class CursoDAO {
 
-    public void salvar(Curso a) {
+    public void salvar(Curso a) throws Exception {
         EntityManager em = getEm();
         try {
          em.getTransaction().begin();
@@ -26,7 +26,7 @@ public class CursoDAO {
         }
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -43,7 +43,7 @@ public class CursoDAO {
         }
     }
 
-     public List<Curso> listarTodos() {
+     public List<Curso> listarTodos() throws Exception {
         EntityManager em = getEm();
         List<Curso> curso;
 
@@ -64,7 +64,7 @@ public class CursoDAO {
         return curso;
     }
      
-  public EntityManager getEm() {
+  public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
 

@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import model.Departamento;
+import model.vo.Departamento;
 
 public class DepartamentoDAO {
-     public void salvar(Departamento a) {
+     public void salvar(Departamento a) throws Exception {
         EntityManager em = getEm();
         try {
               em.getTransaction().begin();
@@ -25,7 +25,7 @@ public class DepartamentoDAO {
         }
     }
      
-      public void delete(int id) {
+      public void delete(int id) throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -42,7 +42,7 @@ public class DepartamentoDAO {
         }
       }
 
-       public List<Departamento> listarTodos() {
+       public List<Departamento> listarTodos() throws Exception {
         EntityManager em = getEm();
         List<Departamento> dpto;
 
@@ -63,7 +63,7 @@ public class DepartamentoDAO {
         return dpto;
     }
       
-  public EntityManager getEm() {
+  public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
 

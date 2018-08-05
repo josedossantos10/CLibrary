@@ -4,12 +4,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import model.DAO.ExemplarDAO;
-import model.Exemplar;
+import model.vo.Exemplar;
+import view.Fachada;
 
 public class ConsultarAcervoController implements Initializable {
 
@@ -18,8 +21,16 @@ public class ConsultarAcervoController implements Initializable {
     private int limit = 16;
     private int max = 16;
 
-    List<Exemplar> exemplares = dao.listarTodos();
+    List<Exemplar> exemplares;
     List<Label> labels = new ArrayList<>();
+
+    public ConsultarAcervoController() {
+        try {
+            this.exemplares = dao.listarTodos();
+        } catch (Exception ex) {
+            Fachada.exibrirErro(ex.getMessage());
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

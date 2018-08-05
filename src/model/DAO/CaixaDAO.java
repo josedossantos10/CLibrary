@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import model.Caixa;
+import model.vo.Caixa;
 
 public class CaixaDAO {
 
-  public void salvar(Caixa a) {
+  public void salvar(Caixa a) throws Exception {
         EntityManager em = getEm();
         try {
          em.getTransaction().begin();
@@ -26,7 +26,7 @@ public class CaixaDAO {
         }
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -43,7 +43,7 @@ public class CaixaDAO {
         }
     }
 
-     public List<Caixa> listarTodos() {
+     public List<Caixa> listarTodos() throws Exception {
         EntityManager em = getEm();
         List<Caixa> curso;
 
@@ -64,7 +64,7 @@ public class CaixaDAO {
         return curso;
     }
      
-  public EntityManager getEm() {
+  public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
     

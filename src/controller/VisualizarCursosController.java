@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,8 +18,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import model.Curso;
+import model.vo.Curso;
 import model.DAO.CursoDAO;
+import view.Fachada;
 
 public class VisualizarCursosController implements Initializable {
 
@@ -27,11 +30,15 @@ public class VisualizarCursosController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        atualizarCurso();
+         try {
+             atualizarCurso();
+         } catch (Exception ex) {
+            Fachada.exibrirErro(ex.getMessage());
+         }
     }
 
     @FXML
-    void excluirCurso() {
+    void excluirCurso() throws Exception {
          Curso u = tabelaCurso.getSelectionModel().getSelectedItem();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Excluir?");
@@ -66,7 +73,7 @@ public class VisualizarCursosController implements Initializable {
     }
 
     @FXML
-    void atualizarCurso() {
+    void atualizarCurso() throws Exception {
         
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 

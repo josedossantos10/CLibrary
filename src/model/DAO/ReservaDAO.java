@@ -6,11 +6,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import model.Reserva;
+import model.vo.Reserva;
 
 public class ReservaDAO {
 
-    public void salvar(Reserva a) {
+    public void salvar(Reserva a) throws Exception {
         EntityManager em = getEm();
         try {
             em.getTransaction().begin();
@@ -27,7 +27,7 @@ public class ReservaDAO {
         }
     }
 
-    public List<Reserva> listarTodos() {
+    public List<Reserva> listarTodos() throws Exception {
         EntityManager em = getEm();
         List<Reserva> reserva;
 
@@ -48,7 +48,7 @@ public class ReservaDAO {
         return reserva;
     }
 
-    public List<Reserva> listarReservasAtivas() {
+    public List<Reserva> listarReservasAtivas() throws Exception {
         EntityManager em = getEm();
         List<Reserva> reserva;
 
@@ -70,7 +70,7 @@ public class ReservaDAO {
     }
 
     
-    public List<Reserva> buscarReservasPorId(int id) {
+    public List<Reserva> buscarReservasPorId(int id) throws Exception {
         EntityManager em = getEm();
         List<Reserva> f;
 
@@ -91,7 +91,7 @@ public class ReservaDAO {
         return null;
     }
 
-   public EntityManager getEm() {
+   public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
 }

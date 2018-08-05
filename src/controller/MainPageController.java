@@ -44,13 +44,13 @@ import model.DAO.EmprestimoDAO;
 import model.DAO.ExemplarDAO;
 import model.DAO.ProfessorDAO;
 import model.DAO.ReservaDAO;
-import model.Emprestimo;
-import model.Exemplar;
-import model.Funcionario;
-import model.Reserva;
-import model.Usuario;
+import model.vo.Emprestimo;
+import model.vo.Exemplar;
+import model.vo.Funcionario;
+import model.vo.Reserva;
+import model.vo.Usuario;
 import model.nativeQueries.StoredProcedure;
-import view.MessageBox;
+import view.Fachada;
 
 public class MainPageController implements Initializable {
 
@@ -61,7 +61,7 @@ public class MainPageController implements Initializable {
 
     public static Usuario atualU;
     public static Funcionario atualF;
-    MessageBox box = new MessageBox();
+    Fachada box = new Fachada();
     Calendar data = Calendar.getInstance();
     DateFormat dfLong = DateFormat.getDateInstance(DateFormat.FULL);
     DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
@@ -122,7 +122,7 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    void atualizarTabPerfil() {
+    void atualizarTabPerfil() throws Exception {
         ProfessorDAO pdao = new ProfessorDAO();
         AlunoDAO adao = new AlunoDAO();
         if (atualU.isProfessor()) {
@@ -153,7 +153,7 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    void abrirTabPedidos() {
+    void abrirTabPedidos() throws Exception {
 
         colunaDataReserva.setCellValueFactory(new PropertyValueFactory<>("data_realizacao"));
         colunaIdReserva.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -282,7 +282,7 @@ public class MainPageController implements Initializable {
         carregarDados();
     }
 
-    void carregarDados() {
+    void carregarDados() throws Exception {
 
         if (atualU != null) {
             tabelaReservasUsuario.setItems(FXCollections.observableArrayList(rdao.buscarReservasPorId(atualU.getId())));
@@ -412,7 +412,7 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    void cancelarReserva() {
+    void cancelarReserva() throws Exception {
         Reserva cReserva = tabelaReservasUsuario.getSelectionModel().getSelectedItem();
         Exemplar rExemplar;
         ExemplarDAO rExemplarDAO = new ExemplarDAO();

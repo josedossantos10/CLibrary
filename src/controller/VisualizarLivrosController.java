@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,23 +17,27 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import model.DAO.ExemplarDAO;
-import model.Exemplar;
-import view.MessageBox;
+import model.vo.Exemplar;
+import view.Fachada;
 
 public class VisualizarLivrosController implements Initializable {
 
     List<Exemplar> exeplares;
     ExemplarDAO dAO = new ExemplarDAO();
     ObservableList<Exemplar> oExempplares;
-    MessageBox box = new MessageBox();
+    Fachada box = new Fachada();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        carregarDados();
+        try {
+            carregarDados();
+        } catch (Exception ex) {
+            Fachada.exibrirErro(ex.getMessage());
+        }
     }
 
     @FXML
-    void excluirLivro() {
+    void excluirLivro() throws Exception {
         Exemplar ex = tabelaLivro.getSelectionModel().getSelectedItem();
       
         if (box.perguntar("Excluir", "Deseja realmente excluir todos exemplares de "+ex.getTitulo()+" edição "+ex.getEdicao(), "Há "+ex.getQuantidade()+ " quantidade(s) desse livro." )) {
@@ -48,7 +54,7 @@ public class VisualizarLivrosController implements Initializable {
     }
 
     @FXML
-    void carregarDados() {
+    void carregarDados() throws Exception {
         columQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade_disponivel"));
         columTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         columAno.setCellValueFactory(new PropertyValueFactory<>("ano"));
@@ -74,7 +80,7 @@ public class VisualizarLivrosController implements Initializable {
     }
 
     @FXML
-    void atualizarLivro() {
+    void atualizarLivro() throws Exception {
         carregarDados();
     }
 

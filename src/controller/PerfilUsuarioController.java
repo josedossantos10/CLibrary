@@ -8,14 +8,17 @@ package controller;
 import static controller.MainPageController.atualU;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import model.Aluno;
+import model.vo.Aluno;
 import model.DAO.AlunoDAO;
 import model.DAO.ProfessorDAO;
-import model.Professor;
+import model.vo.Professor;
+import view.Fachada;
 
 /**
  * FXML Controller class
@@ -29,10 +32,14 @@ public class PerfilUsuarioController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        carregarDados();
+        try {
+            carregarDados();
+        } catch (Exception ex) {
+            Fachada.exibrirErro(ex.getMessage());
+        }
     }
 
-    void carregarDados() {
+    void carregarDados() throws Exception {
         lblNome1.setText(atualU.getNome());
         lblCpf.setText(atualU.getCpf());
         lblMatricula.setText(atualU.getMatricula() + "");
@@ -90,7 +97,7 @@ public class PerfilUsuarioController implements Initializable {
     private Label lblNome1;
 
     @FXML
-    void atualizarTabPerfil() {
+    void atualizarTabPerfil() throws Exception {
         ProfessorDAO pdao = new ProfessorDAO();
         AlunoDAO adao = new AlunoDAO();
         if (MainPageController.atualU.isProfessor()) {

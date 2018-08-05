@@ -3,12 +3,11 @@ package model.DAO;
 import Sigleton.ConnectionBD;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import model.Aluno;
-import model.Professor;
+import model.vo.Professor;
 
 public class ProfessorDAO {
 
-    public void salvar(Professor a) {
+    public void salvar(Professor a) throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -29,7 +28,7 @@ public class ProfessorDAO {
 
     }
 
-    public Professor buscarPorCpf(String cpf) {
+    public Professor buscarPorCpf(String cpf) throws Exception {
         EntityManager em = getEm();
         Professor f;
 
@@ -50,11 +49,11 @@ public class ProfessorDAO {
 
     }
     
-    public EntityManager getEm() {
+    public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
     
-     public Professor buscarPorID(int id) {
+     public Professor buscarPorID(int id) throws Exception {
         EntityManager em = getEm();
         Professor f;        
       

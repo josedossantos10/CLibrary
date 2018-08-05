@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,28 +19,32 @@ import javafx.util.Callback;
 import model.DAO.EmprestimoDAO;
 import model.DAO.ReservaDAO;
 import model.DAO.UsuarioDAO;
-import model.Emprestimo;
-import model.Exemplar;
-import model.Reserva;
-import model.Usuario;
-import view.MessageBox;
+import model.vo.Emprestimo;
+import model.vo.Exemplar;
+import model.vo.Reserva;
+import model.vo.Usuario;
+import view.Fachada;
 
 public class ReservasController implements Initializable {
 
     ReservaDAO reservaDAO = new ReservaDAO();
     UsuarioDAO usuarioDAO = new UsuarioDAO();
     EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
-    MessageBox box = new MessageBox();
+    Fachada box = new Fachada();
     EmprestimoDAO edao = new EmprestimoDAO();
     List<Reserva> reservas;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        carregarDados();
+        try {
+            carregarDados();
+        } catch (Exception ex) {
+            Fachada.exibrirErro(ex.getMessage());
+        }
 
     }
 
-    void carregarDados() {
+    void carregarDados() throws Exception {
         colunaDataReserva.setCellValueFactory(new PropertyValueFactory<>("data_realizacao"));
         colunaIdReserva.setCellValueFactory(new PropertyValueFactory<>("id"));
         colunaInicioReserva.setCellValueFactory(new PropertyValueFactory<>("data_emprestimo"));
@@ -87,7 +93,7 @@ public class ReservasController implements Initializable {
     }
 
     @FXML
-    void efetuarReserva() {
+    void efetuarReserva() throws Exception {
         if (MainPageController.atualF != null) {
             Reserva cReserva = tabelaReservasUsuario.getSelectionModel().getSelectedItem();
             Exemplar e;
@@ -121,7 +127,7 @@ public class ReservasController implements Initializable {
                             box.exibrirMensagemErro("Operação não realizada", "Você já possui esse livro em um Empréstimo.", "Para realizar um novo empréstimo desse livro, primeiro realize a devolução do mesmo e refaça o emprétimo.");
                         }
                     } else {
-                        MessageBox.exibrirMensagemErroS("Operação não realizada", "Limite de empréstimos atingido.");
+                        Fachada.exibrirMensagemErroS("Operação não realizada", "Limite de empréstimos atingido.");
                     }
                     carregarDados();
                 }
@@ -131,7 +137,7 @@ public class ReservasController implements Initializable {
 
             //box.exibrirMensagemAviso("Concluído", "Empréstimo realizado com sucesso!");
         } else {
-            MessageBox.exibrirMensagemErroS("Operação impossível", "Nenhum funcionário autorizado para esta função está logado. Tente novamente mais tarde.");
+            Fachada.exibrirMensagemErroS("Operação impossível", "Nenhum funcionário autorizado para esta função está logado. Tente novamente mais tarde.");
 
         }
     }
@@ -154,7 +160,7 @@ public class ReservasController implements Initializable {
     @FXML
     private TableColumn<Reserva, Integer> colunaIdReserva;
 
-    private boolean verificarEmprestimosAbertos(int id, Exemplar e) {
+    private boolean verificarEmprestimosAbertos(int id, Exemplar e) throws Exception {
 
         List<Emprestimo> ec = edao.buscarEmprestimosPorIdUsuario(id);
 

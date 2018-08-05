@@ -5,7 +5,7 @@ import javax.persistence.EntityManager;
 
 public class StoredProcedure {
 
-    public void cadastrarFuncionario(String cpf, int matricula, String nome, String senha) {
+    public void cadastrarFuncionario(String cpf, int matricula, String nome, String senha) throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -21,7 +21,7 @@ public class StoredProcedure {
         }
     }
 
-    public void suspenderAluno() {
+    public void suspenderAluno() throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -36,7 +36,7 @@ public class StoredProcedure {
         }
     }
 
-    public void expirarReservas() {
+    public void expirarReservas() throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -51,7 +51,7 @@ public class StoredProcedure {
         }
     }
 
-    public void suspenderProfessor() {
+    public void suspenderProfessor() throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -66,7 +66,7 @@ public class StoredProcedure {
         }
     }
 
-    public int validarFuncionario(String login, String senha) {
+    public int validarFuncionario(String login, String senha) throws Exception {
         EntityManager em = getEm();
         int var = 0;
 
@@ -84,7 +84,7 @@ public class StoredProcedure {
         return var;
     }
 
-    public EntityManager getEm() {
+    public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
 

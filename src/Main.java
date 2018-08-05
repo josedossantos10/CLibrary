@@ -13,7 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.nativeQueries.StoredProcedure;
-import view.MessageBox;
+import view.Fachada;
 
 public class Main extends Application {
 
@@ -62,14 +62,14 @@ public class Main extends Application {
             MainPageController.rules.setValorMulta(ee.getValorMulta());
 
         } catch (FileNotFoundException e) {
-            MessageBox.exibrirMensagemErroS("Erro ao carregar", "Arquivo de configuração não encontrado, carregando configurações padrão.");
+            Fachada.exibrirMensagemErroS("Erro ao carregar", "Arquivo de configuração não encontrado, carregando configurações padrão.");
             System.out.println("Arquivo de configuração não encontrado, carregando configurações padrão. " + e.getMessage());
 
         }
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         StoredProcedure storedProcedure = new StoredProcedure();
         
         storedProcedure.suspenderAluno();

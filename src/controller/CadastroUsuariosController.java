@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,31 +18,35 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
-import model.Aluno;
+import model.vo.Aluno;
 import model.DAO.AlunoDAO;
 import model.DAO.DepartamentoDAO;
 import model.DAO.ProfessorDAO;
-import model.Departamento;
-import model.Endereco;
-import model.Professor;
-import model.Usuario;
-import view.MessageBox;
+import model.vo.Departamento;
+import model.vo.Endereco;
+import model.vo.Professor;
+import model.vo.Usuario;
+import view.Fachada;
 
 public class CadastroUsuariosController implements Initializable {
 
     private int id = 0;
     boolean isAtivo=true;
 
-    MessageBox box = new MessageBox();
+    Fachada box = new Fachada();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        DepartamentoDAO o = new DepartamentoDAO();
-        List<Departamento> dptos = o.listarTodos();
-        ObservableList<Departamento> uOL = FXCollections.observableArrayList(dptos);
-        selecDepartamentoUsuario.getItems().addAll(dptos);
-        nomeUsuario.requestFocus();
+        try {
+            DepartamentoDAO o = new DepartamentoDAO();
+            List<Departamento> dptos = o.listarTodos();
+            ObservableList<Departamento> uOL = FXCollections.observableArrayList(dptos);
+            selecDepartamentoUsuario.getItems().addAll(dptos);
+            nomeUsuario.requestFocus();
+        } catch (Exception ex) {
+            Fachada.exibrirErro(ex.getMessage());
+        }
 
     }
 
@@ -86,7 +92,7 @@ public class CadastroUsuariosController implements Initializable {
     }
 
     @FXML
-    void handleSalvarUsuario() throws IOException {
+    void handleSalvarUsuario() throws IOException, Exception {
         Alert alerta;
 
         try {

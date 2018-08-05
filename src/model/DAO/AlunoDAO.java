@@ -6,16 +6,16 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import model.Aluno;
+import model.vo.Aluno;
 
 public class AlunoDAO {
     
 
-    public EntityManager getEm() {
+    public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
 
-    public void salvar(Aluno a) {
+    public void salvar(Aluno a) throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -36,7 +36,7 @@ public class AlunoDAO {
 
     }
     
-    public void delete(int id) {
+    public void delete(int id) throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -57,7 +57,7 @@ public class AlunoDAO {
     }
     
     
-     public List<Aluno> listarTodos() {
+     public List<Aluno> listarTodos() throws Exception {
         EntityManager em = getEm();
         List<Aluno> usuarios;
 
@@ -77,7 +77,7 @@ public class AlunoDAO {
         return usuarios;
     }
      
-       public Aluno buscarPorCpf(String cpf) {
+       public Aluno buscarPorCpf(String cpf) throws Exception {
         EntityManager em = getEm();
         Aluno f;        
       
@@ -92,7 +92,6 @@ public class AlunoDAO {
 
         } catch (Exception e) {
             em.getTransaction().rollback();
-            System.out.println(e.getMessage());
         } finally {
             em.close();
         }
@@ -102,7 +101,7 @@ public class AlunoDAO {
        
        
        
-        public Aluno buscarPorID(int id) {
+        public Aluno buscarPorID(int id) throws Exception {
         EntityManager em = getEm();
         Aluno f;        
       
@@ -111,7 +110,6 @@ public class AlunoDAO {
             Query q = em.createNativeQuery("SELECT * FROM public.aluno a where a.id="+id+";", Aluno.class);
             f = (Aluno) q.getSingleResult();
             em.getTransaction().commit();
-            //System.out.println("\n\n"+f.getCpf()+ "  "+ f.getNome()+"\n\n");
             return f;
 
         } catch (Exception e) {

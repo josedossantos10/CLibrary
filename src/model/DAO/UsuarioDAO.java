@@ -6,11 +6,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import model.Usuario;
+import model.vo.Usuario;
 
 public class UsuarioDAO {
 
-    public void salvar(Usuario a) {
+    public void salvar(Usuario a) throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -31,7 +31,7 @@ public class UsuarioDAO {
 
     }
 
-    public List<Usuario> listarTodos() {
+    public List<Usuario> listarTodos() throws Exception {
         EntityManager em = getEm();
         List<Usuario> usuarios;
 
@@ -52,7 +52,7 @@ public class UsuarioDAO {
         return usuarios;
     }
 
-    public Usuario buscarPorID(int id) {
+    public Usuario buscarPorID(int id) throws Exception {
         EntityManager em = getEm();
         Usuario usuario;
 
@@ -73,7 +73,7 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public Usuario buscarPorCpf(String cpf) {
+    public Usuario buscarPorCpf(String cpf) throws Exception {
         EntityManager em = getEm();
         Usuario f;
 
@@ -95,7 +95,7 @@ public class UsuarioDAO {
         return null;
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws Exception {
         EntityManager em = getEm();
 
         try {
@@ -115,7 +115,7 @@ public class UsuarioDAO {
 
     }
 
-    public List<Usuario> busca(String str) {
+    public List<Usuario> busca(String str) throws Exception {
         EntityManager em = getEm();
         List<Usuario> users;
 
@@ -139,7 +139,7 @@ public class UsuarioDAO {
         return null;
     }
 
-    public EntityManager getEm() {
+    public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
 

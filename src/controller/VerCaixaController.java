@@ -15,12 +15,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import model.Caixa;
+import model.vo.Caixa;
 import model.DAO.CaixaDAO;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import view.MessageBox;
+import view.Fachada;
 
 public class VerCaixaController implements Initializable {
 
@@ -42,7 +42,7 @@ public class VerCaixaController implements Initializable {
     private Label valor;
 
     @FXML
-    double realizarConsulta() {
+    double realizarConsulta() throws Exception {
         double total = 0;
         caixas = caixaDAO.listarTodos();
 
@@ -57,7 +57,7 @@ public class VerCaixaController implements Initializable {
                     total += caixa.getValor();
                 }
             } else {
-                MessageBox.exibrirMensagemErroS("Erro!", "Selecione uma data!");
+                Fachada.exibrirMensagemErroS("Erro!", "Selecione uma data!");
             }
         }
 
@@ -67,7 +67,7 @@ public class VerCaixaController implements Initializable {
     }
 
     @FXML
-    public void expExcel() throws IOException {
+    public void expExcel() throws Exception {
 
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet firstSheet = workbook.createSheet("Caixa1");

@@ -2,23 +2,23 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="CULibraryPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>model.Aluno</class>
-    <class>model.Autor</class>
-    <class>model.Curso</class>
-    <class>model.Departamento</class>
-    <class>model.Endereco</class>
-    <class>model.Exemplar</class>
-    <class>model.Funcionario</class>
-    <class>model.Professor</class>
-    <class>model.Reserva</class>
-    <class>model.Usuario</class>
-    <class>model.Emprestimo</class>
-    <class>model.Caixa</class>
+    <class>model.vo.Curso</class>
+    <class>model.vo.Autor</class>
+    <class>model.vo.Endereco</class>
+    <class>model.vo.Reserva</class>
+    <class>model.vo.Usuario</class>
+    <class>model.vo.Funcionario</class>
+    <class>model.vo.Exemplar</class>
+    <class>model.vo.Caixa</class>
+    <class>model.vo.Aluno</class>
+    <class>model.vo.Departamento</class>
+    <class>model.vo.Professor</class>
+    <class>model.vo.Emprestimo</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/bd_biblioteca"/>
-      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.user" value="bibidba"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="jose1993"/>
+      <property name="javax.persistence.jdbc.password" value="enterprise"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>

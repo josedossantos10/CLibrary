@@ -6,11 +6,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import model.Emprestimo;
+import model.vo.Emprestimo;
 
 public class EmprestimoDAO {
 
-    public void salvar(Emprestimo a) {
+    public void salvar(Emprestimo a) throws Exception {
         EntityManager em = getEm();
         try {
             em.getTransaction().begin();
@@ -28,7 +28,7 @@ public class EmprestimoDAO {
     }
 
 
-    public List<Emprestimo> listarTodos() {
+    public List<Emprestimo> listarTodos() throws Exception {
         EntityManager em = getEm();
         List<Emprestimo> emprestimos;
 
@@ -49,7 +49,7 @@ public class EmprestimoDAO {
         return emprestimos;
     }
 
-    public List<Emprestimo> buscarEmprestimosPorIdUsuario(int id) {
+    public List<Emprestimo> buscarEmprestimosPorIdUsuario(int id) throws Exception {
         EntityManager em = getEm();
         List<Emprestimo> emprestimo;
 
@@ -69,7 +69,7 @@ public class EmprestimoDAO {
         return null;
     }
 
-    public List <Emprestimo> buscarEmprestimosPorIdFuncionario(int id) {
+    public List <Emprestimo> buscarEmprestimosPorIdFuncionario(int id) throws Exception {
         EntityManager em = getEm();
         List<Emprestimo> emprestimo;
 
@@ -91,7 +91,7 @@ public class EmprestimoDAO {
     }
 
 
-public Long quantidadeEmprestimoPorUsuario(int id) {
+public Long quantidadeEmprestimoPorUsuario(int id) throws Exception {
         EntityManager em = getEm();
         Long qtd=1l;
 
@@ -111,7 +111,7 @@ public Long quantidadeEmprestimoPorUsuario(int id) {
         return qtd;
     }
 
-  public EntityManager getEm() {
+  public EntityManager getEm() throws Exception {
         return ConnectionBD.getConnection().createEntityManager();
     }
 
