@@ -15,10 +15,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.vo.Aluno;
 import model.DAO.AlunoDAO;
+import model.DAO.DAOFactory;
 import model.DAO.FuncionarioDAO;
 import model.DAO.ProfessorDAO;
+import model.vo.Aluno;
+
 import model.vo.Funcionario;
 import model.vo.Professor;
 import model.vo.Usuario;
@@ -28,6 +30,7 @@ import view.Fachada;
 public class LoginPageController implements Initializable {
 
     public static Stage stage;
+    DAOFactory factory = DAOFactory.getInstace();
     Fachada box = new Fachada();
     StoredProcedure procedure = new StoredProcedure();
 
@@ -40,7 +43,7 @@ public class LoginPageController implements Initializable {
     @FXML
     public void realizarLoginFuncionario() throws Exception {
         // barra.setVisible(true);
-        FuncionarioDAO o = new FuncionarioDAO();
+        FuncionarioDAO o = factory.getFuncionarioDAO();
 
         if (0 < procedure.validarFuncionario(login.getText(), senha.getText())) {
             Funcionario f = o.buscarPorCpf(login.getText());
@@ -54,26 +57,30 @@ public class LoginPageController implements Initializable {
     }
 
     @FXML
-    void realizarLoginUsuario() throws Exception {
-        AlunoDAO ao = new AlunoDAO();
-        Aluno a = ao.buscarPorCpf(login.getText());
-        if (!(a != null)) {
-            box.exibrirMensagemErro("Erro ao logar Usuário", "Usuário ou senha incorretos!", "Nenhum Professor ou aluno encontrado! Favor entrar em contato com Administrador do sistema.");
+    void realizarLoginUsuario() {
+        try {
+            AlunoDAO ao = factory.getAlunoDAO();
+            Aluno a = ao.buscarPorCpf(login.getText());
+            if (!(a != null)) {
+                box.exibrirMensagemErro("Erro ao logar Usuário", "Usuário ou senha incorretos!", "Nenhum Professor ou aluno encontrado! Favor entrar em contato com Administrador do sistema.");
 
-        } else if (a.getSenha().equals(senha.getText())) {
-            carregarSistemaUsuario(a);
+            } else if (a.getSenha().equals(senha.getText())) {
+                carregarSistemaUsuario(a);
 
-        } else {
-            ProfessorDAO pDao = new ProfessorDAO();
-            Professor p = pDao.buscarPorCpf(login.getText());
-            if (!(p != null)) {
-                              box.exibrirMensagemErro("Erro ao logar Usuário", "Usuário ou senha incorretos!", "Nenhum Professor ou aluno encontrado! Favor entrar em contato com Administrador do sistema!");
-            } else if (p.getSenha().equals(senha.getText())) {
-                carregarSistemaUsuario(p);
             } else {
-            box.exibrirMensagemErro("Erro ao logar como Usuário", "Senha Inválida", "Tente Novamente!");
-  }
+                ProfessorDAO pDao = factory.getProfessorDAO();
+                Professor p = pDao.buscarPorCpf(login.getText());
+                if (!(p != null)) {
+                    box.exibrirMensagemErro("Erro ao logar Usuário", "Usuário ou senha incorretos!", "Nenhum Professor ou aluno encontrado! Favor entrar em contato com Administrador do sistema!");
+                } else if (p.getSenha().equals(senha.getText())) {
+                    carregarSistemaUsuario(p);
+                } else {
+                    box.exibrirMensagemErro("Erro ao logar como Usuário", "Senha Inválida", "Tente Novamente!");
+                }
 
+            }
+        } catch (Exception ex) {
+            Fachada.exibrirErro(ex.getMessage());
         }
 
     }

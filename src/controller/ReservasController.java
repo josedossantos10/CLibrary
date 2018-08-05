@@ -6,8 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
+import model.DAO.DAOFactory;
 import model.DAO.EmprestimoDAO;
 import model.DAO.ReservaDAO;
 import model.DAO.UsuarioDAO;
@@ -27,11 +26,12 @@ import view.Fachada;
 
 public class ReservasController implements Initializable {
 
-    ReservaDAO reservaDAO = new ReservaDAO();
-    UsuarioDAO usuarioDAO = new UsuarioDAO();
-    EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+    DAOFactory factory = DAOFactory.getInstace();
+    ReservaDAO reservaDAO = factory.getReservaDAO();
+    UsuarioDAO usuarioDAO = factory.getUsuarioDAO();
+    EmprestimoDAO emprestimoDAO = factory.getEmprestimoDAO();
+    EmprestimoDAO edao = factory.getEmprestimoDAO();
     Fachada box = new Fachada();
-    EmprestimoDAO edao = new EmprestimoDAO();
     List<Reserva> reservas;
 
     @Override

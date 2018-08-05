@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,35 +16,37 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import model.vo.Curso;
 import model.DAO.CursoDAO;
+import model.DAO.DAOFactory;
+import model.vo.Curso;
 import view.Fachada;
 
 public class VisualizarCursosController implements Initializable {
 
-     List<Curso> cursos;
+    List<Curso> cursos;
     ObservableList<Curso> uOL;
-    CursoDAO DAO = new CursoDAO();
-    
+    DAOFactory factory = DAOFactory.getInstace();
+    CursoDAO DAO = factory.getCursoDAO();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         try {
-             atualizarCurso();
-         } catch (Exception ex) {
+        try {
+            atualizarCurso();
+        } catch (Exception ex) {
             Fachada.exibrirErro(ex.getMessage());
-         }
+        }
     }
 
     @FXML
     void excluirCurso() throws Exception {
-         Curso u = tabelaCurso.getSelectionModel().getSelectedItem();
+        Curso u = tabelaCurso.getSelectionModel().getSelectedItem();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Excluir?");
         alert.setHeaderText("Deseja Realmente Excluir");
         alert.setContentText("Deseja apagar permanentemente o curso: " + u.getNome());
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
-            CursoDAO DAO = new CursoDAO();
+            CursoDAO DAO = factory.getCursoDAO();
             DAO.delete(u.getId());
             atualizarCurso();
 
@@ -64,7 +64,7 @@ public class VisualizarCursosController implements Initializable {
 
     @FXML
     void editarCurso() throws IOException {
- Curso u = tabelaCurso.getSelectionModel().getSelectedItem();
+        Curso u = tabelaCurso.getSelectionModel().getSelectedItem();
         FXMLLoader cadastroLoader = new FXMLLoader(getClass().getResource("/view/CadastroCursos.fxml"));
         AnchorPane editarCurso = (AnchorPane) cadastroLoader.load();
         this.AncorCurso.getChildren().setAll(editarCurso);
@@ -74,13 +74,12 @@ public class VisualizarCursosController implements Initializable {
 
     @FXML
     void atualizarCurso() throws Exception {
-        
+
         columnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
         cursos = DAO.listarTodos();
         uOL = FXCollections.observableArrayList(cursos);
         tabelaCurso.setItems(uOL);
-
 
     }
 
@@ -101,7 +100,7 @@ public class VisualizarCursosController implements Initializable {
 
     @FXML
     private Button excluirCurso;
-    
+
     @FXML
     private TableColumn<Curso, String> columnNome;
 

@@ -16,8 +16,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import model.vo.Autor;
+import model.DAO.DAOFactory;
 import model.DAO.ExemplarDAO;
+import model.vo.Autor;
 import model.vo.Exemplar;
 import view.Fachada;
 
@@ -25,6 +26,7 @@ public class CadastroLivrosController implements Initializable {
 
     Exemplar e = new Exemplar();
     List<Autor> autores = new ArrayList<>();
+    DAOFactory factory = DAOFactory.getInstace();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -40,12 +42,12 @@ public class CadastroLivrosController implements Initializable {
         e.setEdicao(Integer.parseInt(edicaoLivro.getText()));
         if (e.getId() == 0) {
             e.setQuantidade_disponivel(Integer.parseInt(quntidadeLivro.getText()));
-        }else{
-            e.setQuantidade_disponivel(e.getQuantidade_disponivel()+(Integer.parseInt(quntidadeLivro.getText())-e.getQuantidade()));
-        if(e.getQuantidade_disponivel()<0){
-            Fachada.exibrirMensagemErroS("Alerta!", "A QUANTIDADE DISPONÍVEL É UM VALOR NEGATIVO.\nPODE OCORRER ANOMALIAS NO SISTEMA ENQUANTO ESSE VALOR NÃO SE TORNAR POSITIVO.");
-        
-        }
+        } else {
+            e.setQuantidade_disponivel(e.getQuantidade_disponivel() + (Integer.parseInt(quntidadeLivro.getText()) - e.getQuantidade()));
+            if (e.getQuantidade_disponivel() < 0) {
+                Fachada.exibrirMensagemErroS("Alerta!", "A QUANTIDADE DISPONÍVEL É UM VALOR NEGATIVO.\nPODE OCORRER ANOMALIAS NO SISTEMA ENQUANTO ESSE VALOR NÃO SE TORNAR POSITIVO.");
+
+            }
         }
         e.setQuantidade(Integer.parseInt(quntidadeLivro.getText()));
         e.setAno(Integer.parseInt(anoLivro.getText()));
@@ -58,7 +60,7 @@ public class CadastroLivrosController implements Initializable {
 //            autor.setExemplares(exes);
 //            //e.getAutores().add(au);
 //        }
-        ExemplarDAO dAO = new ExemplarDAO();
+        ExemplarDAO dAO = factory.getExemplarDAO();
         dAO.salvar(e);
         limparCamposLivro();
         visualizarLivros();

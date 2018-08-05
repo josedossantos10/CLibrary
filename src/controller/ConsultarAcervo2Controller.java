@@ -5,8 +5,6 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.DAO.DAOFactory;
 import model.DAO.ExemplarDAO;
 import model.DAO.ReservaDAO;
 import model.vo.Exemplar;
@@ -25,7 +24,9 @@ import view.Fachada;
 public class ConsultarAcervo2Controller implements Initializable {
 
     List<Exemplar> exeplares;
-    ExemplarDAO dAO = new ExemplarDAO();
+    DAOFactory factory = DAOFactory.getInstace();
+
+    ExemplarDAO dAO = factory.getExemplarDAO();
     Views views = new Views();
     ObservableList<Exemplar> oExempplares;
     Fachada box = new Fachada();
@@ -43,9 +44,9 @@ public class ConsultarAcervo2Controller implements Initializable {
 
     @FXML
     void reservarLivro() throws Exception {
-        ReservaDAO reservaDAO = new ReservaDAO();
+        ReservaDAO reservaDAO = factory.getReservaDAO();
         Exemplar rExemplar;
-        ExemplarDAO rExemplarDAO = new ExemplarDAO();
+        ExemplarDAO rExemplarDAO = factory.getExemplarDAO();
         Reserva r = new Reserva();
         boolean temReserva = false;
         if ((MainPageController.atualU != null) && (tabelaLivro.getSelectionModel().getSelectedItem() != null)) {

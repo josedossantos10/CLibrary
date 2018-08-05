@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,10 +16,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
-import model.vo.Aluno;
 import model.DAO.AlunoDAO;
+import model.DAO.DAOFactory;
 import model.DAO.DepartamentoDAO;
 import model.DAO.ProfessorDAO;
+import model.vo.Aluno;
 import model.vo.Departamento;
 import model.vo.Endereco;
 import model.vo.Professor;
@@ -31,7 +30,8 @@ import view.Fachada;
 public class CadastroUsuariosController implements Initializable {
 
     private int id = 0;
-    boolean isAtivo=true;
+    boolean isAtivo = true;
+    DAOFactory factory = DAOFactory.getInstace();
 
     Fachada box = new Fachada();
 
@@ -39,7 +39,7 @@ public class CadastroUsuariosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
-            DepartamentoDAO o = new DepartamentoDAO();
+            DepartamentoDAO o = factory.getDepartamentoDAO();
             List<Departamento> dptos = o.listarTodos();
             ObservableList<Departamento> uOL = FXCollections.observableArrayList(dptos);
             selecDepartamentoUsuario.getItems().addAll(dptos);
@@ -50,7 +50,7 @@ public class CadastroUsuariosController implements Initializable {
 
     }
 
-    public void abrirVisualizarUsuarios() throws IOException {
+    public void abrirVisualizarUsuarios() throws Exception {
         AnchorPane visualizarUs = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/VisualizarUsuarios.fxml"));
         CadastrarUsuarioPane.getChildren().setAll(visualizarUs);
 
@@ -87,16 +87,14 @@ public class CadastroUsuariosController implements Initializable {
         emailUsuario.setText(u.getEmail());
         cidadeUsuario.setText(u.getEndereco().getCidade());
 
-        isAtivo=u.isStatus();
+        isAtivo = u.isStatus();
         id = (u.getId());
     }
 
     @FXML
-    void handleSalvarUsuario() throws IOException, Exception {
+    void handleSalvarUsuario()  {
         Alert alerta;
-
         try {
-
             if (professorOrAlunoUsuario.isSelected()) {
                 Professor p = new Professor();
                 p.setId(id);
@@ -111,10 +109,9 @@ public class CadastroUsuariosController implements Initializable {
                 p.setNome(nomeUsuario.getText());
                 p.setProfessor(true);
                 p.setTelefone(telefoneUsuario.getText());
-                   if(!senhaUsuario.equals("")){
-                p.setSenha(senhaUsuario.getText());
+                if (!senhaUsuario.equals("")) {
+                    p.setSenha(senhaUsuario.getText());
                 }
-                //p.setSenha(senhaUsuario.getText());
                 p.setMatricula(Integer.parseInt(matriculaUsuario.getText()));
                 p.setProfessor_departamento(selecDepartamentoUsuario.getValue());
 
@@ -122,7 +119,7 @@ public class CadastroUsuariosController implements Initializable {
                         cidadeUsuario.getText(), "estado");
 
                 p.setEndereco(e);
-                ProfessorDAO daoP = new ProfessorDAO();
+                ProfessorDAO daoP = factory.getProfessorDAO();
                 daoP.salvar(p);
             } else {
                 Aluno a = new Aluno();
@@ -138,15 +135,15 @@ public class CadastroUsuariosController implements Initializable {
                 a.setNome(nomeUsuario.getText());
                 a.setProfessor(false);
                 a.setTelefone(telefoneUsuario.getText());
-                if(!senhaUsuario.equals("")){
-                a.setSenha(senhaUsuario.getText());
+                if (!senhaUsuario.equals("")) {
+                    a.setSenha(senhaUsuario.getText());
                 }
                 a.setMatricula(Integer.parseInt(matriculaUsuario.getText()));
 
                 Endereco e = new Endereco(ruaUsuario.getText(), Integer.parseInt(numeroCasaUsuario.getText()), bairroUsuario.getText(),
                         cidadeUsuario.getText(), "estado");
                 a.setEndereco(e);
-                AlunoDAO dao = new AlunoDAO();
+                AlunoDAO dao = factory.getAlunoDAO();
                 dao.salvar(a);
 
             }
@@ -154,7 +151,7 @@ public class CadastroUsuariosController implements Initializable {
 
             box.exibrirMensagemOk("Salvo", "Usuário salvo com sucesso!");
             abrirVisualizarUsuarios();
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setContentText(e.getMessage());
             alerta.show();

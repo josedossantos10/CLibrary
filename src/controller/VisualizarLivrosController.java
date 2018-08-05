@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import model.DAO.DAOFactory;
 import model.DAO.ExemplarDAO;
 import model.vo.Exemplar;
 import view.Fachada;
@@ -23,7 +22,8 @@ import view.Fachada;
 public class VisualizarLivrosController implements Initializable {
 
     List<Exemplar> exeplares;
-    ExemplarDAO dAO = new ExemplarDAO();
+    DAOFactory factory = DAOFactory.getInstace();
+    ExemplarDAO dAO = factory.getExemplarDAO();
     ObservableList<Exemplar> oExempplares;
     Fachada box = new Fachada();
 
@@ -39,13 +39,13 @@ public class VisualizarLivrosController implements Initializable {
     @FXML
     void excluirLivro() throws Exception {
         Exemplar ex = tabelaLivro.getSelectionModel().getSelectedItem();
-      
-        if (box.perguntar("Excluir", "Deseja realmente excluir todos exemplares de "+ex.getTitulo()+" edição "+ex.getEdicao(), "Há "+ex.getQuantidade()+ " quantidade(s) desse livro." )) {
-           ExemplarDAO DAO = new ExemplarDAO();
+
+        if (box.perguntar("Excluir", "Deseja realmente excluir todos exemplares de " + ex.getTitulo() + " edição " + ex.getEdicao(), "Há " + ex.getQuantidade() + " quantidade(s) desse livro.")) {
+            ExemplarDAO DAO = factory.getExemplarDAO();
             DAO.delete(ex.getId());
             carregarDados();
         }
-        
+
     }
 
     public void abrirCadastrarLivro() throws IOException {
@@ -60,7 +60,6 @@ public class VisualizarLivrosController implements Initializable {
         columAno.setCellValueFactory(new PropertyValueFactory<>("ano"));
         columCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
 
-
         exeplares = dAO.listarTodos();
         oExempplares = FXCollections.observableArrayList(exeplares);
         tabelaLivro.setItems(oExempplares);
@@ -69,13 +68,12 @@ public class VisualizarLivrosController implements Initializable {
 
     @FXML
     void abrirEditarLivro() throws IOException {
-         Exemplar u = tabelaLivro.getSelectionModel().getSelectedItem();
+        Exemplar u = tabelaLivro.getSelectionModel().getSelectedItem();
         FXMLLoader cadastroLoader = new FXMLLoader(getClass().getResource("/view/CadastroLivros.fxml"));
         AnchorPane editarLi = (AnchorPane) cadastroLoader.load();
         this.AncorLivros.getChildren().setAll(editarLi);
         CadastroLivrosController controller = cadastroLoader.getController();
         controller.editarLivro(u);
-     
 
     }
 
@@ -110,8 +108,8 @@ public class VisualizarLivrosController implements Initializable {
 
     @FXML
     private AnchorPane AncorLivros;
-    
-      @FXML
+
+    @FXML
     private TableColumn<Exemplar, Integer> columCodigo;
 
 }

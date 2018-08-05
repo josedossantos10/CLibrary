@@ -5,8 +5,6 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,9 +21,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
-import model.vo.Caixa;
 import model.DAO.CaixaDAO;
+import model.DAO.DAOFactory;
 import model.DAO.UsuarioDAO;
+import model.vo.Caixa;
 import model.vo.Usuario;
 import model.nativeQueries.Views;
 import view.Fachada;
@@ -34,7 +33,8 @@ public class VisualizarUsuariosController implements Initializable {
 
     List<Usuario> usuarios;
     ObservableList<Usuario> uOL;
-    UsuarioDAO DAO = new UsuarioDAO();
+    DAOFactory factory = DAOFactory.getInstace();    
+    UsuarioDAO DAO = factory.getUsuarioDAO();
     Fachada box = new Fachada();
     Views v = new Views();
 
@@ -131,7 +131,7 @@ public class VisualizarUsuariosController implements Initializable {
         alert.setContentText("Deseja apagar permanentemente o usuário: " + u.getNome());
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            UsuarioDAO usuarioDAO = factory.getUsuarioDAO();
             usuarioDAO.delete(u.getId());
             carregarDados();
         }
@@ -186,7 +186,7 @@ public class VisualizarUsuariosController implements Initializable {
         Usuario u = DAO.buscarPorID(tabelaUsuarios.getSelectionModel().getSelectedItem().getId());
         if (u != null) {
             if (box.perguntar("Pagar débito total?", "Deseja Realmente pagar o débito do usuário " + u.getNome() + ". no valor de: R$ " + u.getDebitos())) {
-                CaixaDAO aO = new CaixaDAO();
+                CaixaDAO aO = factory.getCaixaDAOO();
                 c.setData_pagamento(new Date());
                 c.setValor(u.getDebitos());
                 aO.salvar(c);

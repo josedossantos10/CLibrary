@@ -9,8 +9,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -30,6 +27,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import model.DAO.DAOFactory;
 import model.DAO.EmprestimoDAO;
 import model.DAO.ExemplarDAO;
 import model.DAO.UsuarioDAO;
@@ -41,9 +39,10 @@ import view.Fachada;
 
 public class EfetuarEmprestimoController implements Initializable {
 
-    ExemplarDAO edao = new ExemplarDAO();
-    UsuarioDAO udao = new UsuarioDAO();
-    EmprestimoDAO dao = new EmprestimoDAO();
+    DAOFactory factory = DAOFactory.getInstace();
+    ExemplarDAO edao = factory.getExemplarDAO();
+    UsuarioDAO udao = factory.getUsuarioDAO();
+    EmprestimoDAO dao = factory.getEmprestimoDAO();
     List<Emprestimo> emprestimos;
     Calendar data = Calendar.getInstance();
     DateFormat dfLong = DateFormat.getDateInstance(DateFormat.FULL);

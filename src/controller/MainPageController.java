@@ -40,6 +40,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.DAO.AlunoDAO;
+import model.DAO.DAOFactory;
 import model.DAO.EmprestimoDAO;
 import model.DAO.ExemplarDAO;
 import model.DAO.ProfessorDAO;
@@ -55,9 +56,10 @@ import view.Fachada;
 public class MainPageController implements Initializable {
 
     public static Rules rules = new Rules();
+    DAOFactory factory = DAOFactory.getInstace();
     StoredProcedure sp = new StoredProcedure();
-    EmprestimoDAO edao = new EmprestimoDAO();
-    ReservaDAO rdao = new ReservaDAO();
+    EmprestimoDAO edao = factory.getEmprestimoDAO();
+    ReservaDAO rdao = factory.getReservaDAO();
 
     public static Usuario atualU;
     public static Funcionario atualF;
@@ -123,8 +125,8 @@ public class MainPageController implements Initializable {
 
     @FXML
     void atualizarTabPerfil() throws Exception {
-        ProfessorDAO pdao = new ProfessorDAO();
-        AlunoDAO adao = new AlunoDAO();
+        ProfessorDAO pdao = factory.getProfessorDAO();
+        AlunoDAO adao = factory.getAlunoDAO();
         if (atualU.isProfessor()) {
 
             atualU = pdao.buscarPorID(atualU.getId());
@@ -415,7 +417,7 @@ public class MainPageController implements Initializable {
     void cancelarReserva() throws Exception {
         Reserva cReserva = tabelaReservasUsuario.getSelectionModel().getSelectedItem();
         Exemplar rExemplar;
-        ExemplarDAO rExemplarDAO = new ExemplarDAO();
+        ExemplarDAO rExemplarDAO = factory.getExemplarDAO();
 
         if (cReserva != null) {
 

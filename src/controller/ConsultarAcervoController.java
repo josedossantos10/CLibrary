@@ -4,19 +4,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import model.DAO.DAOFactory;
 import model.DAO.ExemplarDAO;
 import model.vo.Exemplar;
 import view.Fachada;
 
 public class ConsultarAcervoController implements Initializable {
 
-    ExemplarDAO dao = new ExemplarDAO();
+    DAOFactory factory = DAOFactory.getInstace();
+    ExemplarDAO  dao = factory.getExemplarDAO();
     private int posicaoLivro = 0;
     private int limit = 16;
     private int max = 16;
@@ -96,7 +96,7 @@ public class ConsultarAcervoController implements Initializable {
         limparLabels();
 
         if (exemplares.size() < max) {
-            posicaoLivro = exemplares.size()-16;
+            posicaoLivro = exemplares.size() - 16;
             limit = exemplares.size();
             btnAnterior.setDisable(false);
             btnProximo.setDisable(true);

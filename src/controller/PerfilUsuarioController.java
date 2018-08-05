@@ -1,22 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import static controller.MainPageController.atualU;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import model.vo.Aluno;
 import model.DAO.AlunoDAO;
+import model.DAO.DAOFactory;
 import model.DAO.ProfessorDAO;
+import model.vo.Aluno;
 import model.vo.Professor;
 import view.Fachada;
 
@@ -68,7 +62,6 @@ public class PerfilUsuarioController implements Initializable {
     @FXML
     private Label lblEstado;
 
- 
     @FXML
     private Label lblCpf;
 
@@ -98,8 +91,9 @@ public class PerfilUsuarioController implements Initializable {
 
     @FXML
     void atualizarTabPerfil() throws Exception {
-        ProfessorDAO pdao = new ProfessorDAO();
-        AlunoDAO adao = new AlunoDAO();
+        DAOFactory factory = DAOFactory.getInstace();
+        ProfessorDAO pdao = factory.getProfessorDAO();
+        AlunoDAO adao = factory.getAlunoDAO();
         if (MainPageController.atualU.isProfessor()) {
 
             Professor p = pdao.buscarPorID(MainPageController.atualU.getId());
@@ -116,9 +110,8 @@ public class PerfilUsuarioController implements Initializable {
                 lblSituacao.setText("Suspenso");
             }
         }
-            lblValorDebitos.setText(MainPageController.atualU.getDebitos() + "");
-            
-        
+        lblValorDebitos.setText(MainPageController.atualU.getDebitos() + "");
+
     }
 
 }

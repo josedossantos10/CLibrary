@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,16 +12,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import model.vo.Curso;
 import model.DAO.CursoDAO;
+import model.DAO.DAOFactory;
 import model.DAO.DepartamentoDAO;
+import model.vo.Curso;
+
 import model.vo.Departamento;
 import view.Fachada;
 
 public class CadastroCursosController implements Initializable {
+    
+    DAOFactory factory = DAOFactory.getInstace();
 
     Curso c = new Curso();
-    DepartamentoDAO o = new DepartamentoDAO();
+    DepartamentoDAO o = factory.getDepartamentoDAO();
     List<Departamento> dptos;
 
     @Override
@@ -65,7 +67,7 @@ public class CadastroCursosController implements Initializable {
         c.setNome(nomeCurso.getText());
         c.setCurso_departamento(selecDepartamentoCurso.getValue());
         selecDepartamentoCurso.getValue().getCursos().add(c);
-        CursoDAO co = new CursoDAO();
+        CursoDAO co = factory.getCursoDAO();
         co.salvar(c);
         limparCampos(null);
 

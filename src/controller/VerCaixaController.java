@@ -15,8 +15,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import model.vo.Caixa;
 import model.DAO.CaixaDAO;
+import model.DAO.DAOFactory;
+import model.vo.Caixa;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -24,7 +25,8 @@ import view.Fachada;
 
 public class VerCaixaController implements Initializable {
 
-    CaixaDAO caixaDAO = new CaixaDAO();
+    DAOFactory factory = DAOFactory.getInstace();
+    CaixaDAO caixaDAO = factory.getCaixaDAOO();
     DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     DateTimeFormatter formatadorArq = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -74,7 +76,7 @@ public class VerCaixaController implements Initializable {
 
         LocalDate dataConsulta = data.getValue();
         FileOutputStream fos;
-        String arquivoName = "caixa_"+dataConsulta.format(formatadorArq) + ".xls";
+        String arquivoName = "caixa_" + dataConsulta.format(formatadorArq) + ".xls";
         try {
             fos = new FileOutputStream(new File(arquivoName));
 
@@ -104,10 +106,9 @@ public class VerCaixaController implements Initializable {
                     i++;
                 }
             }
-                    HSSFRow linha = firstSheet.createRow(i);
-                    linha.createCell(0).setCellValue("Valor Total: R$ ");
-                    linha.createCell(2).setCellValue(realizarConsulta());
-            
+            HSSFRow linha = firstSheet.createRow(i);
+            linha.createCell(0).setCellValue("Valor Total: R$ ");
+            linha.createCell(2).setCellValue(realizarConsulta());
 
             workbook.write(fos);
             fos.flush();
@@ -118,5 +119,5 @@ public class VerCaixaController implements Initializable {
 
         Desktop.getDesktop().open(new File(arquivoName));
 
-    } 
+    }
 }
