@@ -32,7 +32,6 @@ public class LoginPageController implements Initializable {
     public static Stage stage;
     DAOFactory factory = DAOFactory.getInstace();
     Fachada box = new Fachada();
-    StoredProcedure procedure = new StoredProcedure();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -114,32 +113,31 @@ public class LoginPageController implements Initializable {
         
         @Override
         public void handle(ActionEvent event) {
+            Usuario usuarioSession = new Usuario();
+            usuarioSession.setCpf(login.getText());
+            usuarioSession.setSenha(senha.getText());
+            
             if (event.getSource().equals(btnEntrarUsuario)) {
-                realizarLoginUsuario();
+                RealizarLoginUsuario loginUsuario = new RealizarLoginUsuario();
+                loginUsuario.Logar(usuarioSession);
             } else if (event.getSource().equals(btnEntrarF)) {
-                realizarLoginFuncionario();
-                
+                RealizarLoginFuncionario loginFuncionario = new RealizarLoginFuncionario();
+                loginFuncionario.Logar(usuarioSession);
             } else if (event.getSource().equals(btnsair)) {
                 SairLogin();
             }
             
         }
         
+        void SairLogin() {
+            stage.close();
+            
+        }
+      /*
+        
         @FXML
         public void realizarLoginFuncionario() {
-            try {
-                // barra.setVisible(true);
-                FuncionarioDAO o = factory.getFuncionarioDAO();
-                
-                if (0 < procedure.validarFuncionario(login.getText(), senha.getText())) {
-                    Funcionario f = o.buscarPorCpf(login.getText());
-                    carregarSistemaFuncionario(f);
-                } else {
-                    box.exibrirMensagemErro("Erro ao logar Funcionário", "Usuário ou senha incorretos!", "Nenhum Funcionário encontrado! Tente logar como Aluno/Professor.");
-                }
-            } catch (Exception ex) {
-                Fachada.exibrirErro(ex.getMessage());
-            }
+
             
         }
         
@@ -172,12 +170,8 @@ public class LoginPageController implements Initializable {
             
         }
         
-        @FXML
-        void SairLogin() {
-            stage.close();
-            
-        }
-        
+       
+          
         public void carregarSistemaFuncionario(Funcionario f) {
             
             try {
@@ -204,25 +198,12 @@ public class LoginPageController implements Initializable {
         
         public void carregarSistemaUsuario(Usuario u) {
             
-            try {
-                FXMLLoader FXLogin = new FXMLLoader(getClass().getResource("/view/MainPage.fxml"));
-                MainPageController.atualU = u;
-                MainPageController.atualF = null;
+      
+               
                 
-                Parent root = FXLogin.load();
-                
-                Scene janela = new Scene(root);
-                stage.close();
-                stage.setScene(janela);
-                stage.setTitle("Sistema de Gerenciamento da Biblioteca da Califonia University");
-                stage.setResizable(false);
-                
-                stage.show();
-                
-            } catch (IOException ex) {
-            }
-            
-        }
+
+          
+        }*/
         
     }
     
