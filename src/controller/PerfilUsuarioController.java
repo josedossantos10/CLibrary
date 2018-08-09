@@ -41,9 +41,9 @@ public class PerfilUsuarioController implements Initializable {
         lblTelefone.setText(atualU.getTelefone());
         lblCelular.setText(atualU.getCelular());
 
-        lblRuaNumeroBairro.setText(atualU.getEndereco().getRua() + ", Nº " + atualU.getEndereco().getNumero() + "- " + atualU.getEndereco().getBairro());
-        lblCidade.setText(atualU.getEndereco().getCidade());
-        lblEstado.setText(atualU.getEndereco().getEstado());
+        lblRuaNumeroBairro.setText(atualU.getEndereco(atualU.getId()).getRua() + ", Nº " + atualU.getEndereco(atualU.getId()).getNumero() + "- " + atualU.getEndereco(atualU.getId()).getBairro());
+        lblCidade.setText(atualU.getEndereco(atualU.getId()).getCidade());
+        lblEstado.setText(atualU.getEndereco(atualU.getId()).getEstado());
 
         lblValorDebitos.setText(atualU.getDebitos() + "");
         if (atualU.isStatus()) {

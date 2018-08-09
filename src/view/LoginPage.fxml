@@ -17,7 +17,7 @@
             <Image url="recursos/imagens/fundo-GT.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btnEntrarF" defaultButton="true" layoutX="466.0" layoutY="337.0" onAction="#realizarLoginFuncionario" opacity="0.83" prefHeight="58.0" prefWidth="129.0" text="Entrar como Funcionário" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="btnEntrarF" defaultButton="true" layoutX="466.0" layoutY="337.0"  opacity="0.83" prefHeight="58.0" prefWidth="129.0" text="Entrar como Funcionário" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
@@ -47,12 +47,12 @@
          </font>
       </PasswordField>
       <ProgressBar fx:id="barra" focusTraversable="false" layoutX="46.0" layoutY="366.0" prefWidth="200.0" />
-      <Button fx:id="btnEntrarUsuario" defaultButton="true" layoutX="329.0" layoutY="337.0" onAction="#realizarLoginUsuario" opacity="0.83" prefHeight="58.0" prefWidth="129.0" text="Entrar como Aluno/Professor" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="btnEntrarUsuario" defaultButton="true" layoutX="329.0" layoutY="337.0" opacity="0.83" prefHeight="58.0" prefWidth="129.0" text="Entrar como Aluno/Professor" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnsair" cancelButton="true" layoutX="256.0" layoutY="365.0" mnemonicParsing="false" onAction="#SairLogin" prefHeight="29.0" prefWidth="63.0" text="Voltar">
+      <Button fx:id="btnsair" cancelButton="true" layoutX="256.0" layoutY="365.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="63.0" text="Voltar">
          <font>
             <Font size="13.0" />
          </font>

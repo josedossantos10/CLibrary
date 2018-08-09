@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,16 +30,16 @@ import model.vo.Usuario;
 import view.Fachada;
 
 public class CadastroUsuariosController implements Initializable {
-
+    
     private int id = 0;
     boolean isAtivo = true;
     DAOFactory factory = DAOFactory.getInstace();
-
+    
     Fachada box = new Fachada();
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         try {
             DepartamentoDAO o = factory.getDepartamentoDAO();
             List<Departamento> dptos = o.listarTodos();
@@ -47,15 +49,15 @@ public class CadastroUsuariosController implements Initializable {
         } catch (Exception ex) {
             Fachada.exibrirErro(ex.getMessage());
         }
-
+        
     }
-
+    
     public void abrirVisualizarUsuarios() throws Exception {
         AnchorPane visualizarUs = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/VisualizarUsuarios.fxml"));
         CadastrarUsuarioPane.getChildren().setAll(visualizarUs);
-
+        
     }
-
+    
     @FXML
     public void limparCampos() {
         matriculaUsuario.setText("");
@@ -70,29 +72,33 @@ public class CadastroUsuariosController implements Initializable {
         emailUsuario.setText("");
         cidadeUsuario.setText("");
         selecDepartamentoUsuario.setValue(null);
-
+        
     }
-
+    
     public void editarUsuario(Usuario u) {
-        matriculaUsuario.setText(u.getMatricula() + "");
-        numeroCasaUsuario.setText(u.getEndereco().getNumero() + "");
-        telefoneUsuario.setText(u.getTelefone());
-        cpfUsuario.setText(u.getCpf());
-        bairroUsuario.setText(u.getEndereco().getBairro());
-        ruaUsuario.setText(u.getEndereco().getRua());
-        nomeUsuario.setText(u.getNome());
-        celularUsuario.setText(u.getCelular());
-        senhaUsuario.setPromptText("Insira nova Senha");
-        senhaUsuario.setText(u.getSenha());
-        emailUsuario.setText(u.getEmail());
-        cidadeUsuario.setText(u.getEndereco().getCidade());
-
-        isAtivo = u.isStatus();
-        id = (u.getId());
+        try {
+            matriculaUsuario.setText(u.getMatricula() + "");
+            numeroCasaUsuario.setText(u.getEndereco(u.getId()).getNumero() + "");
+            telefoneUsuario.setText(u.getTelefone());
+            cpfUsuario.setText(u.getCpf());
+            bairroUsuario.setText(u.getEndereco(u.getId()).getBairro());
+            ruaUsuario.setText(u.getEndereco(u.getId()).getRua());
+            nomeUsuario.setText(u.getNome());
+            celularUsuario.setText(u.getCelular());
+            senhaUsuario.setPromptText("Insira nova Senha");
+            senhaUsuario.setText(u.getSenha());
+            emailUsuario.setText(u.getEmail());
+            cidadeUsuario.setText(u.getEndereco(u.getId()).getCidade());
+            
+            isAtivo = u.isStatus();
+            id = (u.getId());
+        } catch (Exception ex) {
+            Fachada.exibrirErro(ex.getMessage());
+        }
     }
-
+    
     @FXML
-    void handleSalvarUsuario()  {
+    void handleSalvarUsuario() {
         Alert alerta;
         try {
             if (professorOrAlunoUsuario.isSelected()) {
@@ -114,10 +120,10 @@ public class CadastroUsuariosController implements Initializable {
                 }
                 p.setMatricula(Integer.parseInt(matriculaUsuario.getText()));
                 p.setProfessor_departamento(selecDepartamentoUsuario.getValue());
-
+                
                 Endereco e = new Endereco(ruaUsuario.getText(), Integer.parseInt(numeroCasaUsuario.getText()), bairroUsuario.getText(),
                         cidadeUsuario.getText(), "estado");
-
+                
                 p.setEndereco(e);
                 ProfessorDAO daoP = factory.getProfessorDAO();
                 daoP.salvar(p);
@@ -139,16 +145,16 @@ public class CadastroUsuariosController implements Initializable {
                     a.setSenha(senhaUsuario.getText());
                 }
                 a.setMatricula(Integer.parseInt(matriculaUsuario.getText()));
-
+                
                 Endereco e = new Endereco(ruaUsuario.getText(), Integer.parseInt(numeroCasaUsuario.getText()), bairroUsuario.getText(),
                         cidadeUsuario.getText(), "estado");
                 a.setEndereco(e);
                 AlunoDAO dao = factory.getAlunoDAO();
                 dao.salvar(a);
-
+                
             }
             limparCampos();
-
+            
             box.exibrirMensagemOk("Salvo", "Usuário salvo com sucesso!");
             abrirVisualizarUsuarios();
         } catch (Exception e) {
@@ -158,9 +164,9 @@ public class CadastroUsuariosController implements Initializable {
             alerta.setTitle("Erro!");
         }
         id = 0;
-
+        
     }
-
+    
     @FXML
     private void ativarProfessor() {
         if (professorOrAlunoUsuario.isSelected()) {
@@ -169,56 +175,56 @@ public class CadastroUsuariosController implements Initializable {
             selecDepartamentoUsuario.setDisable(true);
         }
     }
-
+    
     @FXML
     private Button SalvarUsuario;
-
+    
     @FXML
     private ToggleButton professorOrAlunoUsuario;
-
+    
     @FXML
     private ComboBox<Departamento> selecDepartamentoUsuario;
-
+    
     @FXML
     private TextField matriculaUsuario;
-
+    
     @FXML
     private TextField numeroCasaUsuario;
-
+    
     @FXML
     private TextField telefoneUsuario;
-
+    
     @FXML
     private TextField cpfUsuario;
-
+    
     @FXML
     private TextField bairroUsuario;
-
+    
     @FXML
     private TextField ruaUsuario;
-
+    
     @FXML
     private TextField nomeUsuario;
-
+    
     @FXML
     private TextField celularUsuario;
-
+    
     @FXML
     private PasswordField senhaUsuario;
-
+    
     @FXML
     private TextField emailUsuario;
-
+    
     @FXML
     private TextField cidadeUsuario;
-
+    
     @FXML
     private Button visualizarUsuarios;
-
+    
     @FXML
     private AnchorPane CadastrarUsuarioPane;
-
+    
     @FXML
     private Button limparUsuario;
-
+    
 }

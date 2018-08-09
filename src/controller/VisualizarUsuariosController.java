@@ -143,7 +143,7 @@ public class VisualizarUsuariosController implements Initializable {
         //  u.setEndereco(u.g);
         Usuario u = DAO.buscarPorCpf(tabelaUsuarios.getSelectionModel().getSelectedItem().getCpf());
 
-        System.out.println(u.getNome() + " :::  " + u.getEndereco());
+        System.out.println(u.getNome() + " :::  " + u.getEndereco(u.getId()));
         FXMLLoader cadastroLoader = new FXMLLoader(getClass().getResource("/view/CadastroUsuarios.fxml"));
         AnchorPane editarUs = (AnchorPane) cadastroLoader.load();
         this.AncorUsuarios.getChildren().setAll(editarUs);

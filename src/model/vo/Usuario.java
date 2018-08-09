@@ -13,6 +13,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import model.DAO.DAOFactory;
+import model.DAO.EnderecoDAO;
 
 @Entity
 @SequenceGenerator(name = "usuario", sequenceName = "usuario_seq", allocationSize = 1, initialValue = 1)
@@ -25,7 +27,7 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario")
     private int id;
     @Column(length = 50, nullable = false)
-     String nome;
+    String nome;
     @Column(length = 8, nullable = false)
     private String senha;
     @Column(length = 11, nullable = false, unique = true)
@@ -69,7 +71,6 @@ public class Usuario implements Serializable {
     public void setProfessor(boolean professor) {
         this.professor = professor;
     }
-    
 
     public String getCpf() {
         return cpf;
@@ -151,8 +152,12 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public Endereco getEndereco(int id) throws Exception {
+        if (this.endereco != null) {
+            return endereco;
+        }
+        DAOFactory factory = DAOFactory.getInstace();
+        return factory.getEnderecoDAO().find(id);
     }
 
     public void setEndereco(Endereco endereco) {
@@ -163,6 +168,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return nome; //To change body of generated methods, choose Tools | Templates.
     }
-    
 
 }
