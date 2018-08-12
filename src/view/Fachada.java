@@ -1,21 +1,29 @@
 
 package view;
 
+import config.Data;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import model.SalvarLog;
 
 public class Fachada {
     
-  
     public static void exibrirMensagemErroS(String titulo, String msg) {
-        
+        SalvarLog sl = new SalvarLog();
+        sl.salvar(msg);
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setTitle(titulo);
         a.setHeaderText(msg);
         a.showAndWait();
 
     }
+
     public static void exibrirErro(String msg) {
+        SalvarLog sl = new SalvarLog();
+        sl.salvar(msg);
         
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setTitle("Erro!");
@@ -25,6 +33,7 @@ public class Fachada {
     }
     
        public void exibrirMensagemErro(String titulo, String msg) {
+  
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setTitle(titulo);
         a.setHeaderText(msg);
@@ -79,8 +88,5 @@ public class Fachada {
         a.show();
 
     }
-    
-    
-    
     
 }

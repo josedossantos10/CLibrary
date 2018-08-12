@@ -12,13 +12,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.DAO.DAOFactory;
+import model.DAO.DAOFactoryPostgreSQL;
+import model.DAO.UsuarioDAO;
 import model.nativeQueries.StoredProcedure;
+import model.vo.Usuario;
 import view.Fachada;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage Stage) {
+        try {
+              Usuario a = DAOFactory.getInstace().getUsuarioDAO().buscarPorID(9);
+              a.getEndereco(9);
+        } catch (Exception e) {
+        }
         FileReader ler;
 
         //  UsuarioDAO dAO = new UsuarioDAO();
@@ -28,6 +37,8 @@ public class Main extends Application {
         //  LoginPageController LC =FXLogin.getController();
         //LC.stage=Stage;
         try {
+          
+            
             FXMLLoader FXLogin = new FXMLLoader(getClass().getResource("/view/MainPage.fxml"));
             Parent root = FXLogin.load();
             MainPageController LC = FXLogin.getController();

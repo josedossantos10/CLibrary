@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,7 +44,7 @@ public class Usuario implements Serializable {
     @Column(length = 10, nullable = false)
     private String telefone;
     private double debitos;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Endereco endereco;
 
     public Usuario() {
@@ -154,8 +155,10 @@ public class Usuario implements Serializable {
 
     public Endereco getEndereco(int id) throws Exception {
         if (this.endereco != null) {
+            System.out.println("ENTREI AQUI");
             return endereco;
         }
+       System.out.println("nao ENTREI AQUI");
         DAOFactory factory = DAOFactory.getInstace();
         return factory.getEnderecoDAO().find(id);
     }
